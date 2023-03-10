@@ -8,8 +8,8 @@ import { propsToClassKey } from '@mui/styles';
 import { OptionUnstyled } from '@mui/base';
 
 export default function RadioGroups(props) {
-  const radioOptions = props.options.map((x)=>  
-    <FormControlLabel style={{color:'rgb(0 0 0 / 60%)'}} 
+  const radioOptions = props.options.map((x,id)=>  
+    <FormControlLabel key={id} style={{color:'rgb(0 0 0 / 60%)'}} 
             value={x.value} control={<Radio   sx={{
        color: 'rgb(0 0 0 / 60%)',
        '&.Mui-checked': {
@@ -27,7 +27,7 @@ export default function RadioGroups(props) {
         aria-labelledby="demo-row-radio-buttons-group-label"
         name= {props.name}
         onChange={props.onchange} 
-        disableRipple={true}  
+        disableripple="true"
       >
 {radioOptions}
       </RadioGroup> 

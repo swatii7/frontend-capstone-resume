@@ -34,15 +34,10 @@ export default function Education() {
 //   const classes = useStyles();
 
   const [education, setEducation] = useState({
-    qualification: '',
-    university_name: '',
-    degree:'',
-    marks:'',
-    start_year: '',
-    end_year: ''
+    
   })
 
-  console.log(education)
+
 
   const inputHandler = (e) => {
     setEducation({ ...education, [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value })
@@ -79,7 +74,7 @@ export default function Education() {
       <Grid container  alignItems="flex-end" style={{alignItems:'end'}}>
 
 <Grid item md={10} lg={10} style={{ marginTop: '15px' ,  textAlign:"end" }}>
-    <TabNavigation />
+    <TabNavigation tabIndex= {3} tabBackIndex= {1} />
   </Grid>
 </Grid>
 

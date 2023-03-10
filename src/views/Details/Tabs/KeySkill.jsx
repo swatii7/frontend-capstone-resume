@@ -83,6 +83,7 @@ export default function KeySkill() {
         <Button variant="outlined" style={{color:'#9f4545' ,borderColor:'#9f4545'}} onClick={addSkillHandler}>Add More Skills...</Button>
         </Grid>
     </Grid>
+    <TabNavigation showPreview tabBackIndex= {2}/>
 
     </div>
   )

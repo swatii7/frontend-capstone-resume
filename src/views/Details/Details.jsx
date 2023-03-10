@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
-
 import { makeStyles } from '@mui/styles'
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
@@ -10,6 +9,10 @@ import PersonalInfo from './Tabs/PersonalInfo';
 import WorkExperiance from "./Tabs/WorkExperience";
 import Education from './Tabs/Education';
 import KeySkill from './Tabs/KeySkill';
+import { connect } from "react-redux";
+
+
+
 
 const useStyles = makeStyles(()=>({
 
@@ -46,7 +49,7 @@ function a11yProps(index) {
   };
 }
 
-export default function VerticalTabs() {
+const VerticalTabs= (props)=> {
   const [value, setValue] = React.useState(0);
   const classes = useStyles();
   const handleChange = (event, newValue) => {
@@ -63,7 +66,7 @@ export default function VerticalTabs() {
       <Tabs
         orientation="vertical"
         //variant="scrollable"
-        value={value}
+        value={props.activeTab}
         //onChange={handleChange}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider'}}
@@ -77,16 +80,16 @@ export default function VerticalTabs() {
       </Tabs>
       </Grid>
       <Grid item xs={12} md={8} lg={9}>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={props.activeTab} index={0}>
        <PersonalInfo />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={props.activeTab} index={1}>
     <WorkExperiance />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={props.activeTab} index={2}>
        <Education />
       </TabPanel>
-      <TabPanel value={value} index={3}>
+      <TabPanel value={props.activeTab} index={3}>
         <KeySkill />
       </TabPanel>
       </Grid>
@@ -94,4 +97,17 @@ export default function VerticalTabs() {
     </Grid>
   );
 }
+
+const mapstatetoProps= (state) =>{
+  return {
+    activeTab: state.activeTab
+  }
+
+}
+
+
+
+export default connect(mapstatetoProps, null)(VerticalTabs);
+
+
 

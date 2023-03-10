@@ -1,6 +1,8 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux';
+import { store } from './store/store.js';
 import {
 
   BrowserRouter
@@ -29,7 +31,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
   <ThemeProvider theme={theme}>
   <BrowserRouter >
+  <Provider store= {store}>
   <App />
+  </Provider>
   </BrowserRouter>
 
    

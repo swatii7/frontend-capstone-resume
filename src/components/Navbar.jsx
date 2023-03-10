@@ -66,7 +66,7 @@ export default function DrawerAppBar(props) {
       <Divider />
       <List>
         {navItems.map((item,index) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={index} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
            
             <p>{item.name}</p>
