@@ -1,13 +1,36 @@
+import Button from "@mui/material/Button";
 import Grid from '@mui/material/Grid';
+import Stack from "@mui/material/Stack";
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
-import React from 'react';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { connect } from "react-redux";
 import CustomInput from '../../../components/CustomInput/CustomInput';
 import RadioGroups from '../../../components/RadioGroups/RadioGroups';
-import TabNavigation from '../../../components/TabNavigation';
 import * as storeActions from "../../../store/action-creator";
+import { styled } from "@mui/material/styles";
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText("rgb(159, 69, 69)"),
+  backgroundColor: "rgb(159, 69, 69)",
+  "&:hover": {
+    backgroundColor: "rgb(159, 69, 69)",
+  },
+}));
+
+
+
+function  ValidateEmail (input)  {
+  var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if (input.match(validRegex)) {
+    return true;
+
+  } else {
+    return false;
+
+  }
+}
+
 
 
 
@@ -57,7 +80,6 @@ const PersonalInfo = (props) => {
   ]
 
   const inputHandler = (e) => {
-    // setPersonalInfo({ ...personalinfo, [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value })
     props.inputChangeHandler(e)
 
 
@@ -70,6 +92,18 @@ const PersonalInfo = (props) => {
 
   const regionChangeHandler = (val) => {
     props.regionChangeHandler(val)
+  }
+
+  const tabHandler= ()=>{
+    if(props.first_name ===''){
+      console.log('first name empty')
+    }
+    else if(props.last_name === ''){
+      console.log('last name empty')
+    }
+    else if( ValidateEmail(props.email)){
+      console.log('email id is wrong')
+    }
   }
   
 
@@ -148,15 +182,50 @@ Spanish." value={props.description} onchange={inputHandler}
       <Grid container  alignItems="flex-end" style={{alignItems:'end'}}>
 
       <Grid item md={10} lg={10} style={{ marginTop: '15px' ,  textAlign:"end" }}>
-          <TabNavigation disableBack tabIndex= {1} />
+          <Stack
+      spacing={2}
+      direction="row"
+      style={{ justifyContent: "end", marginTop: "43px" }}
+    >
+    {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+        {alertMessage}
+        </Alert>
+      </Snackbar> */}
+      {props.disableBack ? null : (
+        <Button
+          variant="text"
+          onClick={() => {
+            props.tabBackHandler(props.tabBackIndex);
+          }}
+          style={{ color: "rgb(159, 69, 69)" }}
+        >
+          Back
+        </Button>
+      )}
+      {props.showPreview ? (
+        <ColorButton
+          type={"submit"}
+          variant="contained"
+          onClick={() => {
+            props.tabChangeHandler(props.tabIndex);
+          }}
+        >
+          Preview
+        </ColorButton>
+      ) : (
+        <ColorButton
+          type={"submit"}
+          variant="contained"
+          onClick={tabHandler}
+        >
+          Next
+        </ColorButton>
+      )}
+    </Stack>
+          
         </Grid>
       </Grid>
-
-
-
-      {/* <CustomCheckbox checked={personalinfo.checked} onChange= {inputHandler} name= 'checked' id= 'firstCheck' label= 'I understand' /> */}
-
-
 
     </div>
   )
@@ -192,9 +261,16 @@ return {
 
   countryChangeHandler:(val)=> {
     dispatch(storeActions.countryChangeHandler(val))
-  }
+  },
+   tabChangeHandler: (value) => {
+    dispatch(storeActions.tabChangeHandler(value));
+  },
+  tabBackHandler: (value) => {
+    dispatch(storeActions.tabBackIndex(value));
+  },
+};
 
 }
-}
+
 
 export default  connect(mapstatetoProps, mapdispatchtoProps)(PersonalInfo)

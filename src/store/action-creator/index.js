@@ -83,11 +83,27 @@ export const removeKeyHandler= (i,keyPointIndex) =>{
     return (dispatch) =>{
         dispatch ({
             type: 'REMOVE_KEY',
-            value: {
+       
                 rowIndex: i,
-            itemIndex: keyPointIndex          }
+            itemIndex: keyPointIndex          
         })
     }
 }
 
- 
+export const addSkillHandler= (keySkill) =>{
+    return (dispatch) =>{
+        dispatch ({
+        type: 'ADD_SKILL',
+       payload: keySkill        
+        })
+    }
+}
+
+export const handleSkillDelete= (data) =>{
+    return (dispatch) =>{
+        dispatch ({
+        type: 'DEL_SKILL',
+       payload: data        
+        })
+    }
+}
