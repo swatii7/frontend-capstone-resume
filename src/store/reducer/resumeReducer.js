@@ -7,8 +7,8 @@ const initialState = {
   gender: "",
   marital_status: "",
   address: "",
-  country: "India",
-  region: "Himachal Pradesh",
+  country: "",
+  region: "",
   pin_code: "",
   description: "",
   activeTab: 0,
@@ -29,7 +29,9 @@ const initialState = {
   marks: "",
   start_year: "",
   end_year: "",
-  chipData: []
+  chipData: [],
+  activeSlide: 0
+
 };
 
 const reducer = (state = initialState, action) => {
@@ -57,7 +59,6 @@ const reducer = (state = initialState, action) => {
 
     /*update state for work experience tab*/
   } else if (action.type === "WORK_EXP_CHANGE") {
-    console.log(action.payload);
     return {
       ...state,
       user_experience: state.user_experience.map((user_exp, i) => {
@@ -122,6 +123,12 @@ const reducer = (state = initialState, action) => {
 
     return{ ...state,chipData:updatedkeyskills}
 
+}
+
+/* for selected templates */
+else if(action.type === 'SELECTED_TEMPLATE'){
+  
+  return{ ...state, activeSlide: action.payload}
 }
    
   

@@ -4,11 +4,24 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { connect } from "react-redux";
 import CustomInput from "../../../components/CustomInput/CustomInput";
 import TabNavigation from "../../../components/TabNavigation";
 import * as storeActions from "../../../store/action-creator";
+import Stack from "@mui/material/Stack";
+import {  useSnackbar } from 'notistack';
+// import { Redirect } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+// import Button from "@mui/material/Button";
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText("rgb(159, 69, 69)"),
+  backgroundColor: "rgb(159, 69, 69)",
+  "&:hover": {
+    backgroundColor: "rgb(159, 69, 69)",
+  },
+}));
+
 
 
 const ListItem = styled("li")(({ theme }) => ({
@@ -17,6 +30,25 @@ const ListItem = styled("li")(({ theme }) => ({
 
 const KeySkill = (props) =>{
   const [keySkill, setKeySkill] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const [q, setq] = useState (false)
+
+
+  useEffect(()=>{
+if(! props.chipData )return
+if(props.chipData.length < 3
+  ){
+    // enqueueSnackbar('All Fields are required');
+    setq(true)
+  }
+  else{
+    setq(false)
+  }
+  
+
+  },[props.chipData])
+
 
 
   const handleDelete = (chipToDelete) => () => {
@@ -24,6 +56,16 @@ const KeySkill = (props) =>{
       chips.filter((chip) => chip.key !== chipToDelete.key)
     );setKeySkill
   };
+
+   const SkillHandlerTab = ()=>{
+    if(keySkill === ''){
+      enqueueSnackbar('Enter atleast 3 valid key Skills');
+    }
+    else{
+      props.addSkillHandler(keySkill);
+      setKeySkill('')
+    }
+  }
 
 
 
@@ -66,7 +108,7 @@ const KeySkill = (props) =>{
             label="Add Skill"
             name={"skill"}
             type="text"
-            placeholder="Add your job related skills"
+            placeholder="Add your atleast 3 valid skills e.g (html, css, react, angular)"
             value={keySkill}
             onchange={(e) => setKeySkill(e.target.value)}
           />
@@ -75,23 +117,56 @@ const KeySkill = (props) =>{
           <Button
             variant="outlined"
             style={{ color: "#9f4545", borderColor: "#9f4545" }}
-            onClick={()=> {
-              props.addSkillHandler(keySkill)
-              setKeySkill('')
-            }}
+            onClick={
+              SkillHandlerTab
+              // setKeySkill('')
+            }
           >
             Add More Skills...
           </Button>
         </Grid>
       </Grid>
-      <TabNavigation showPreview tabBackIndex={2} />
+      <Grid container  alignItems="flex-end" style={{alignItems:'end'}}>
+
+<Grid item md={10} lg={10} style={{ marginTop: '15px' ,  textAlign:"end" }}>
+    <Stack
+spacing={2}
+direction="row"
+style={{ justifyContent: "end", marginTop: "43px" }}
+>
+
+
+{props.disableBack ? null : (
+        <Button
+          variant="text"
+          onClick={() => {
+            props.tabBackHandler(props.tabBackIndex);
+          }}
+          style={{ color: "rgb(159, 69, 69)" }}
+        >
+          Back
+        </Button>
+      )}
+       
+        <ColorButton
+          type={"submit"}
+          variant="contained"
+          disabled = {q}
+          onClick={() =>navigate("/preview")}
+        >
+          Preview
+        </ColorButton>
+       
+</Stack>
+    
+  </Grid>
+</Grid>
     </div>
   );
 }
 
 const mapstatetoProps= (state) =>{
   return{
-    keySkill: state.keySkill,
     chipData: state.chipData
   }
 

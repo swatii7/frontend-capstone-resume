@@ -1,4 +1,5 @@
 import AddTaskIcon from "@mui/icons-material/AddTask";
+import { useEffect } from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -18,6 +19,17 @@ import CustomInput from "../../../components/CustomInput/CustomInput";
 import RadioGroups from "../../../components/RadioGroups/RadioGroups";
 import TabNavigation from "../../../components/TabNavigation";
 import * as storeActions from "../../../store/action-creator";
+import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import {  useSnackbar } from 'notistack';
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText("rgb(159, 69, 69)"),
+  backgroundColor: "rgb(159, 69, 69)",
+  "&:hover": {
+    backgroundColor: "rgb(159, 69, 69)",
+  },
+}));
+
 
 const useStyles = makeStyles(() => ({
   dropdownWrapper: {
@@ -34,6 +46,7 @@ const useStyles = makeStyles(() => ({
 
 const PersonalInfo = (props) => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
 
   /*use radio button */
   const expRadios = [
@@ -47,9 +60,55 @@ const PersonalInfo = (props) => {
     },
   ];
 
+  useEffect (()=> {
+    if(props.exp === 'f'){
+      props.tabChangeHandler(2) 
+    }
+  }, [props.exp])
+
   const radioChangeHandler = (e) => {
     props.inputChangeHandler(e);
   };
+
+  const experienceAddHandler= ()=> {
+    console.log(props)
+    const getcurrentposition  = props.user_experience.length; //0
+if(getcurrentposition !== -1){
+if(props.user_experience[getcurrentposition-1].job_title === ''){
+  enqueueSnackbar('All Fields are required')
+}
+else if(props.user_experience[getcurrentposition-1].org_name === ''){
+  enqueueSnackbar('All Fields are required')
+}
+else if(props.user_experience[getcurrentposition-1].start_year === ''){
+  enqueueSnackbar('All Fields are required')
+}
+else if(props.user_experience[getcurrentposition-1].end_year === ''){
+  enqueueSnackbar('All Fields are required')
+}
+else {
+  props.addAnotherExpHandler(getcurrentposition)
+}
+  }
+}
+
+  const tabHandler= ()=>{
+   
+console.log(props.user_experience)
+    if(props.user_experience.length === 0
+   ){
+      enqueueSnackbar('All Fields are required')
+    }
+    // else if(props.user_experience.job_title === ''){
+    //   enqueueSnackbar('All Fields are required')
+    // }
+     else{
+      props.tabChangeHandler (2)
+     }
+   
+  }
+
+  
 
   return (
     <div>
@@ -59,7 +118,7 @@ const PersonalInfo = (props) => {
       >
         Work Experience
       </Typography>
-
+      
       <Grid container rowSpacing={1} columnSpacing={{ lg: 3, md: 3 }}>
         <Grid item md={6} lg={6} style={{ marginTop: "15px" }}>
           <RadioGroups
@@ -79,6 +138,7 @@ const PersonalInfo = (props) => {
             columnSpacing={{ lg: 3, md: 3 }}
             style={{ alignItems: "center" }}
           >
+
 
           {/* used map for add another work experience  */}
             {props.user_experience.map((exp, i) => (
@@ -169,24 +229,58 @@ const PersonalInfo = (props) => {
               <Button
                 variant="outlined"
                 style={{ color: "#9f4545", borderColor: "#9f4545" }}
-                onClick={props.addAnotherExpHandler}
+                onClick={experienceAddHandler}
               >
-                Add Another Experience...
+                Add Work Experience...
               </Button>
             </Grid>
           </Grid>
         )}
 
-        <Grid container alignItems="flex-end" style={{ alignItems: "end" }}>
-          <Grid
-            item
-            md={10}
-            lg={10}
-            style={{ marginTop: "15px", textAlign: "end" }}
-          >
-            <TabNavigation tabIndex={2} tabBackIndex={0} />
-          </Grid>
-        </Grid>
+        <Grid container  alignItems="flex-end" style={{alignItems:'end'}}>
+
+<Grid item md={10} lg={10} style={{ marginTop: '15px' ,  textAlign:"end" }}>
+    <Stack
+spacing={2}
+direction="row"
+style={{ justifyContent: "end", marginTop: "43px" }}
+>
+
+
+{props.disableBack ? null : (
+        <Button
+          variant="text"
+          onClick={() => {
+            props.tabBackHandler(props.tabBackIndex);
+          }}
+          style={{ color: "rgb(159, 69, 69)" }}
+        >
+          Back
+        </Button>
+      )}
+      {props.showPreview ? (
+        <ColorButton
+          type={"submit"}
+          variant="contained"
+          onClick={() => {
+            props.tabChangeHandler(props.tabIndex);
+          }}
+        >
+          Preview
+        </ColorButton>
+      ) : (
+  <ColorButton
+    type={"submit"}
+    variant="contained"
+    onClick={tabHandler}
+  >
+    Next
+  </ColorButton>
+)}
+</Stack>
+    
+  </Grid>
+</Grid>
       </Grid>
     </div>
   );
@@ -194,6 +288,7 @@ const PersonalInfo = (props) => {
 
 const mapstatetoProps = (state) => {
   return {
+
     exp: state.exp,
     user_experience: state.user_experience,
   };
@@ -218,6 +313,9 @@ const mapdispatchtoProps = (dispatch) => {
 
     removeKeyHandler: (i, keyPointIndex) => {
       dispatch(storeActions.removeKeyHandler(i, keyPointIndex));
+    },
+    tabChangeHandler: (value) => {
+      dispatch(storeActions.tabChangeHandler(value));
     },
 
   };

@@ -8,6 +8,8 @@ import {
   BrowserRouter
 } from "react-router-dom"
 import App from './App'
+import { SnackbarProvider  } from 'notistack';
+
 import './index.css'
 
 const theme = createTheme({
@@ -15,7 +17,21 @@ const theme = createTheme({
     primary: {
       main: "#EEEEEE",
     },
-
+    typography: {
+      fontFamily: [
+        "IBM Plex Sans",
+        //  "-apple-system",
+        //   "BlinkMacSystemFont",
+        //  "Segoe UI",
+        //   "Roboto",
+        //   "Helvetica Neue",
+        //    "Arial",
+        //     "sans-serif", 
+        //     "Apple Color Emoji",
+        //      "Segoe UI Emoji", 
+        //      "Segoe UI Symbol"
+      ].join(','),
+    },
   },
   components: {
     MuiButtonBase: {
@@ -32,7 +48,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeProvider theme={theme}>
   <BrowserRouter >
   <Provider store= {store}>
+  <SnackbarProvider maxSnack={3}>
   <App />
+  </SnackbarProvider>
+
   </Provider>
   </BrowserRouter>
 

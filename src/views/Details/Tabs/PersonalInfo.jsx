@@ -9,6 +9,7 @@ import CustomInput from '../../../components/CustomInput/CustomInput';
 import RadioGroups from '../../../components/RadioGroups/RadioGroups';
 import * as storeActions from "../../../store/action-creator";
 import { styled } from "@mui/material/styles";
+import {  useSnackbar } from 'notistack';
 
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText("rgb(159, 69, 69)"),
@@ -17,21 +18,6 @@ const ColorButton = styled(Button)(({ theme }) => ({
     backgroundColor: "rgb(159, 69, 69)",
   },
 }));
-
-
-
-function  ValidateEmail (input)  {
-  var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  if (input.match(validRegex)) {
-    return true;
-
-  } else {
-    return false;
-
-  }
-}
-
-
 
 
 const useStyles = makeStyles(() => ({
@@ -53,6 +39,7 @@ const useStyles = makeStyles(() => ({
 
 const PersonalInfo = (props) => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
 
 
  
@@ -94,16 +81,33 @@ const PersonalInfo = (props) => {
     props.regionChangeHandler(val)
   }
 
+  /* make function with condition to show alert message */
   const tabHandler= ()=>{
-    if(props.first_name ===''){
-      console.log('first name empty')
+    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
+    let phoneno = /^\d{10}$/;
+    if(props.first_name ==='' || 
+    props.last_name === '' ||
+    props.email=== '' || 
+    props.mobile_number === '' ||
+    props.gender === '' ||
+    props.marital_status === '' ||
+     props.country === '' ||
+      props.region === '' ||
+      props.address === ''||
+      props.description === ''
+    ){
+      enqueueSnackbar('All Fields are required')
     }
-    else if(props.last_name === ''){
-      console.log('last name empty')
+    else if(props.email !== '' && !emailRegex.test(props.email)){
+      enqueueSnackbar('Enter Valid Email')
+    } 
+    else if( props.mobile_number !== '' && !phoneno.test(props.mobile_number)){
+      enqueueSnackbar('Enter valid Mobile Number')
     }
-    else if( ValidateEmail(props.email)){
-      console.log('email id is wrong')
+    else{
+      props.tabChangeHandler(1) 
     }
+   
   }
   
 
@@ -124,7 +128,7 @@ const PersonalInfo = (props) => {
           <CustomInput label="Email" name={'email'} type='text' placeholder='abc@gmail.com' value={props.email} onchange={inputHandler} />
         </Grid>
         <Grid item md={6} lg={6} style={{ marginTop: '15px' }}>
-          <CustomInput label="Mobile Number" name={'mobile_number'} type='text' placeholder='+91 1230-456-789' value={props.mobile_number} onchange={inputHandler} />
+          <CustomInput label="Mobile Number" name={'mobile_number'} type='number' placeholder='+91 1230-456-789' value={props.mobile_number} onchange={inputHandler} />
         </Grid>
         <Grid item md={6} lg={6} style={{ marginTop: '15px' }}>
           <RadioGroups options={genderRadios} selectedValue={props.gender} name={'gender'} onchange={inputHandler} label="Gender" />
@@ -163,7 +167,7 @@ const PersonalInfo = (props) => {
           <CustomInput label="Residence Address" name={'address'} type='text' placeholder='Gr Flr New Padmavati Ngr, Film City Road, Goregaon East' value={props.address} onchange={inputHandler} />
         </Grid>
         <Grid item md={6} lg={6} style={{ marginTop: '15px' }}>
-          <CustomInput name={'pin_code'} type='text' placeholder='Pin Code' value={props.pin_code} onchange={inputHandler}
+          <CustomInput name={'pin_code'} type='number' placeholder='Pin Code' value={props.pin_code} onchange={inputHandler}
           
            />
         </Grid>
@@ -187,22 +191,8 @@ Spanish." value={props.description} onchange={inputHandler}
       direction="row"
       style={{ justifyContent: "end", marginTop: "43px" }}
     >
-    {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-        {alertMessage}
-        </Alert>
-      </Snackbar> */}
-      {props.disableBack ? null : (
-        <Button
-          variant="text"
-          onClick={() => {
-            props.tabBackHandler(props.tabBackIndex);
-          }}
-          style={{ color: "rgb(159, 69, 69)" }}
-        >
-          Back
-        </Button>
-      )}
+    
+
       {props.showPreview ? (
         <ColorButton
           type={"submit"}

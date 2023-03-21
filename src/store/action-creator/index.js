@@ -107,3 +107,12 @@ export const handleSkillDelete= (data) =>{
         })
     }
 }
+
+export const selectedTemHandler= (index) =>{
+    return (dispatch) =>{
+        dispatch ({
+            type : 'SELECTED_TEMPLATE',
+            payload: index
+        })
+    }
+}

@@ -1,16 +1,28 @@
+import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useSnackbar } from 'notistack';
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import CustomInput from "../../../components/CustomInput/CustomInput";
-import { connect} from "react-redux";
-import TabNavigation from "../../../components/TabNavigation";
 import * as storeActions from "../../../store/action-creator";
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText("rgb(159, 69, 69)"),
+  backgroundColor: "rgb(159, 69, 69)",
+  "&:hover": {
+    backgroundColor: "rgb(159, 69, 69)",
+  },
+}));
+
 
 
 const Education= (props) =>{
   //   const classes = useStyles();
 
   const [education, setEducation] = useState({});
+  const { enqueueSnackbar } = useSnackbar();
 
   const inputHandler = (e) => {
     setEducation({
@@ -19,6 +31,22 @@ const Education= (props) =>{
         e.target.type === "checkbox" ? e.target.checked : e.target.value,
     });
   };
+
+  const tabHandler= ()=>{
+    if(props.qualification === '' ||
+    props.university_name === '' ||
+    props.degree === '' ||
+    props.marks === '' ||
+    props.start_year === '' ||
+    props.end_year === ''
+    ){
+      enqueueSnackbar('All Fields are required')
+    }
+    else{
+      props.tabChangeHandler(3) 
+    }
+   
+  }
 
   return (
     <div>
@@ -101,7 +129,49 @@ const Education= (props) =>{
           lg={10}
           style={{ marginTop: "15px", textAlign: "end" }}
         >
-          <TabNavigation tabIndex={3} tabBackIndex={1} />
+           <Grid container  alignItems="flex-end" style={{alignItems:'end'}}>
+
+<Grid item md={10} lg={10} style={{ marginTop: '15px' ,  textAlign:"end" }}>
+    <Stack
+spacing={2}
+direction="row"
+style={{ justifyContent: "end", marginTop: "43px" }}
+>
+
+{props.disableBack ? null : (
+        <Button
+          variant="text"
+          onClick={() => {
+            props.tabBackHandler(props.tabBackIndex);
+          }}
+          style={{ color: "rgb(159, 69, 69)" }}
+        >
+          Back
+        </Button>
+      )}
+{props.showPreview ? (
+  <ColorButton
+    type={"submit"}
+    variant="contained"
+    onClick={() => {
+      props.tabChangeHandler(props.tabIndex);
+    }}
+  >
+    Preview
+  </ColorButton>
+) : (
+  <ColorButton
+    type={"submit"}
+    variant="contained"
+    onClick={tabHandler}
+  >
+    Next
+  </ColorButton>
+)}
+</Stack>
+    
+  </Grid>
+</Grid>
         </Grid>
       </Grid>
     </div>
@@ -123,6 +193,9 @@ const mapdispatchtoProps = (dispatch) =>{
 return{
   inputChangeHandler: (event) =>{
     dispatch(storeActions.inputChangeHandler(event))
+  },
+  tabChangeHandler: (value) => {
+    dispatch(storeActions.tabChangeHandler(value));
   }
 }
 }
