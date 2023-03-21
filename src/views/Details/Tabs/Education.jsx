@@ -16,7 +16,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-
+//
 
 const Education= (props) =>{
   //   const classes = useStyles();
@@ -141,9 +141,7 @@ style={{ justifyContent: "end", marginTop: "43px" }}
 {props.disableBack ? null : (
         <Button
           variant="text"
-          onClick={() => {
-            props.tabBackHandler(props.tabBackIndex);
-          }}
+          onClick={()=>props.tabChangeHandler(1) }
           style={{ color: "rgb(159, 69, 69)" }}
         >
           Back
@@ -163,7 +161,7 @@ style={{ justifyContent: "end", marginTop: "43px" }}
   <ColorButton
     type={"submit"}
     variant="contained"
-    onClick={tabHandler}
+    onClick={()=>tabHandler()}
   >
     Next
   </ColorButton>
@@ -195,7 +193,7 @@ return{
     dispatch(storeActions.inputChangeHandler(event))
   },
   tabChangeHandler: (value) => {
-    dispatch(storeActions.tabChangeHandler(value));
+    dispatch(storeActions.tabBackIndex(value));
   }
 }
 }

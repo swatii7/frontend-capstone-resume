@@ -47,6 +47,7 @@ const useStyles = makeStyles(() => ({
 const PersonalInfo = (props) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
+  //
 
   /*use radio button */
   const expRadios = [
@@ -60,18 +61,15 @@ const PersonalInfo = (props) => {
     },
   ];
 
-  useEffect (()=> {
-    if(props.exp === 'f'){
-      props.tabChangeHandler(2) 
-    }
-  }, [props.exp])
 
   const radioChangeHandler = (e) => {
+    if(e.target.value === 'f'){
+      props.tabChangeHandler(2) 
+    }
     props.inputChangeHandler(e);
   };
 
   const experienceAddHandler= ()=> {
-    console.log(props)
     const getcurrentposition  = props.user_experience.length; //0
 if(getcurrentposition !== -1){
 if(props.user_experience[getcurrentposition-1].job_title === ''){
@@ -93,15 +91,16 @@ else {
 }
 
   const tabHandler= ()=>{
-   
-console.log(props.user_experience)
     if(props.user_experience.length === 0
    ){
       enqueueSnackbar('All Fields are required')
     }
-    // else if(props.user_experience.job_title === ''){
-    //   enqueueSnackbar('All Fields are required')
-    // }
+    else if(props.user_experience[0].job_title === ''||
+     props.user_experience[0].org_name=== '' ||
+      props.user_experience[0].start_year === '' || 
+      props.user_experience[0].end_year === ''){
+      enqueueSnackbar('All Fields are required')
+    }
      else{
       props.tabChangeHandler (2)
      }
@@ -250,9 +249,7 @@ style={{ justifyContent: "end", marginTop: "43px" }}
 {props.disableBack ? null : (
         <Button
           variant="text"
-          onClick={() => {
-            props.tabBackHandler(props.tabBackIndex);
-          }}
+          onClick={()=>props.tabChangeHandler (0)}
           style={{ color: "rgb(159, 69, 69)" }}
         >
           Back
@@ -272,7 +269,7 @@ style={{ justifyContent: "end", marginTop: "43px" }}
   <ColorButton
     type={"submit"}
     variant="contained"
-    onClick={tabHandler}
+    onClick={()=>tabHandler()}
   >
     Next
   </ColorButton>

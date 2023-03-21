@@ -10,6 +10,7 @@ import RadioGroups from '../../../components/RadioGroups/RadioGroups';
 import * as storeActions from "../../../store/action-creator";
 import { styled } from "@mui/material/styles";
 import {  useSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
 
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText("rgb(159, 69, 69)"),
@@ -18,7 +19,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
     backgroundColor: "rgb(159, 69, 69)",
   },
 }));
-
+//
 
 const useStyles = makeStyles(() => ({
 
@@ -40,6 +41,7 @@ const useStyles = makeStyles(() => ({
 const PersonalInfo = (props) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
 
  
@@ -191,7 +193,13 @@ Spanish." value={props.description} onchange={inputHandler}
       direction="row"
       style={{ justifyContent: "end", marginTop: "43px" }}
     >
-    
+     <Button
+          variant="outlined"
+          onClick={() => navigate("/")}
+          style={{ color: "rgb(159, 69, 69)", border: '1px solid rgb(159, 69, 69)' }}
+        >
+          Back to Template
+        </Button>
 
       {props.showPreview ? (
         <ColorButton
@@ -207,7 +215,7 @@ Spanish." value={props.description} onchange={inputHandler}
         <ColorButton
           type={"submit"}
           variant="contained"
-          onClick={tabHandler}
+          onClick={()=>tabHandler()}
         >
           Next
         </ColorButton>
@@ -256,6 +264,7 @@ return {
     dispatch(storeActions.tabChangeHandler(value));
   },
   tabBackHandler: (value) => {
+
     dispatch(storeActions.tabBackIndex(value));
   },
 };

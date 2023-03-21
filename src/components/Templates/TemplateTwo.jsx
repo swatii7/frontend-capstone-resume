@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 
 const TemplateTwo = () => {
   return (
-    <Container style={{padding:"0px"}}>
+    <Container id= 'temTwo' style={{padding:"0px"}}>
     <Box
       sx={{ width: "100vh", height: "auto", border: "2px solid #e4e0e0" }}
     >

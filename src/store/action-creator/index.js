@@ -28,6 +28,7 @@ export const inputChangeHandler = (event) => {
  }
 
  export const tabChangeHandler= (value) =>{
+   //// console.log(value,'dhdhdhdhdh')
     return(dispatch) => {
         dispatch ({
             type: 'TAB_CHANGE',
@@ -58,8 +59,6 @@ export const inputChangeHandler = (event) => {
  }
 
  export const addKeyHandler= (index) => {
-
-    console.log(index)
     return (dispatch) =>{
         dispatch({
             type: 'ADD_KEY',

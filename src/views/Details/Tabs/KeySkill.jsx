@@ -21,7 +21,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
     backgroundColor: "rgb(159, 69, 69)",
   },
 }));
-
+//
 
 
 const ListItem = styled("li")(({ theme }) => ({
@@ -140,7 +140,7 @@ style={{ justifyContent: "end", marginTop: "43px" }}
         <Button
           variant="text"
           onClick={() => {
-            props.tabBackHandler(props.tabBackIndex);
+            props.tabChangeHandler(2) 
           }}
           style={{ color: "rgb(159, 69, 69)" }}
         >
@@ -179,6 +179,9 @@ return{
   },
   handleSkillDelete: (data) =>{
     dispatch(storeActions.handleSkillDelete(data))
+  },
+  tabChangeHandler: (value) => {
+    dispatch(storeActions.tabBackIndex(value));
   }
 
 }

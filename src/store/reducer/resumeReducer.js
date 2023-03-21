@@ -54,7 +54,6 @@ const reducer = (state = initialState, action) => {
   } else if (action.type === "TAB_CHANGE") {
     return { ...state, activeTab: action.payload };
   } else if (action.type === "TAB_BACK_INDEX") {
-    console.log(action.payload);
     return { ...state, activeTab: action.payload };
 
     /*update state for work experience tab*/

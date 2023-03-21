@@ -8,8 +8,8 @@ import { connect } from "react-redux";
 
 const TemplateOne = () => {
   return (
-    <Container style={{ margin: "83px auto" }}>
-      <Box sx={{ width: "110vh", height: "auto", border: "2px solid #e4e0e0" }}>
+    <Container id= 'temOne' style={{ margin: "83px auto" }}>
+      <Box sx={{ width: "100vh", height: "auto", border: "2px solid #e4e0e0" }}>
         <Container>
           <Box sx={{ flexGrow: 1 }}>
             <Grid

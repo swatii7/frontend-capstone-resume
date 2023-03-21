@@ -7,7 +7,7 @@ import TemplateTwo from '../../components/Templates/TemplateTwo'
 import ImageOne from '../../assets/TemplateImg/TemplateOne.png';
 import ImageTwo from '../../assets/TemplateImg/TemplateTwo.png';
 import ImageThree from '../../assets/TemplateImg/TemplateThree.png';
-import ImageFour from '../../assets/TemplateImg/TemplateFour.png';
+import ImageFour from '../../assets/TemplateImg/TemplateFour.png'
 import { makeStyles } from '@mui/styles'
 import Grid from '@mui/material/Grid';
 import { connect } from 'react-redux';
@@ -91,8 +91,6 @@ const Home=(props) => {
             index: 3 }
          
   ]
-
-  console.log( props.activeSlide)
 
 
   const classes = styles();
@@ -182,7 +180,6 @@ const mapstatetoProps=(state)=>{
   };
   
   const mapdispatchtoProps = (dispatch) =>{
-      console.log('clicked')
   return{
       selectedTemHandler: (index) =>{
           dispatch(storeActions.selectedTemHandler(index))
