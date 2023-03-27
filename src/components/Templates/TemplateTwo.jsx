@@ -8,9 +8,9 @@ import { connect } from "react-redux";
 
 const TemplateTwo = () => {
   return (
-    <Container id= 'temTwo' style={{padding:"0px"}}>
+    <Container style={{ margin: "83px auto" }}>
     <Box
-      sx={{ width: "100vh", height: "auto", border: "2px solid #e4e0e0" }}
+      sx={{ width:'1000px' ,height: "auto", border: "2px solid #e4e0e0" }}
     >
       {/* <Container> */}
         <Box sx={{ flexGrow: 1 }}>

@@ -3,13 +3,30 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
+import { propsToClassKey } from "@mui/styles";
 import React from "react";
 import { connect } from "react-redux";
 
-const TemplateOne = () => {
+
+/* function is used to get first character  */
+function getFirstChar (value){
+return value && typeof value === "string" &&  value !== '' ?   value.charAt(0).toUpperCase() : value;
+
+}
+
+/* function is used to for capitlization */
+function capitalize (value){
+  return value && typeof value  === "string" &&  value !== '' ?  value.charAt(0).toUpperCase() + value.slice(1) : value;
+
+}
+
+const TemplateOne = (props) => {
+
   return (
-    <Container id= 'temOne' style={{ margin: "83px auto" }}>
-      <Box sx={{ width: "100vh", height: "auto", border: "2px solid #e4e0e0" }}>
+    <Container>
+
+
+      <Grid item md={12} lg={12}  sx={{ width: "1000px", height: "auto", border: "2px solid #e4e0e0" }}>
         <Container>
           <Box sx={{ flexGrow: 1 }}>
             <Grid
@@ -44,17 +61,18 @@ const TemplateOne = () => {
                       top: "50px",
                     }}
                   >
-                    SC
+         {props.first_name === ''? "N" : getFirstChar(props.first_name)}
+                    {props.last_name === ''? "/A" : getFirstChar(props.last_name)}
                   </p>
                 </div>
               </Grid>
               <Grid item md={6} lg={6}>
                 <div style={{ fontSize: "22px", color: "#61a9da" }}>
                   <h3 style={{ margin: "0px 15px", fontSize: "44px" }}>
-                    Swati Chaudhary
+                    {capitalize(props.first_name)} {capitalize(props.last_name)}
                   </h3>
                   <span style={{ margin: "10px 15px", fontSize: "25px" }}>
-                    Web Developer
+                    {capitalize(props.job_title)}
                   </span>
                 </div>
               </Grid>
@@ -67,13 +85,21 @@ const TemplateOne = () => {
                   }}
                 >
                   <p className="head-section" style={{ paddingTop: "11px" }}>
-                    Address: 123, AnyWhere, Any city
+                    {capitalize(props.address)}, {capitalize(props.pin_code)}
+                  </p>
+                  <p className="head-section" style={{ paddingTop: "21px" }}>
+                  {props.country} {capitalize(props.region)}
                   </p>
                   <p className="head-section" style={{ paddingTop: "24px" }}>
-                    contact Number: 1234-567-789
+                   {props.mobile_number}                  </p>
+                  <p className="head-section" style={{ paddingTop: "24px" }}>
+                    {props.email}
                   </p>
                   <p className="head-section" style={{ paddingTop: "24px" }}>
-                    Email: any@gmail.com
+                    {capitalize(props.gender)}
+                  </p>
+                  <p className="head-section" style={{ paddingTop: "24px" }}>
+                    {capitalize(props.marital_status)}
                   </p>
                 </div>
               </Grid>
@@ -86,7 +112,9 @@ const TemplateOne = () => {
               opacity: "0.9",
             }}
           />
-          <div>
+
+          {props.exp === 'e' &&(
+            <div>
             <p
               style={{
                 color: "rgb(62 138 190)",
@@ -94,27 +122,47 @@ const TemplateOne = () => {
                 wordSpacing: "0.1rem",
               }}
             >
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
+              {capitalize(props.description)}
             </p>
-          </div>
-          <Divider
+            <Divider
             style={{
               borderWidth: "5px",
               backgroundColor: "rgb(97,169,218,0.85)",
               opacity: "0.9",
             }}
           />
+          </div>
+          
+          )}
+         
+         
           <div style={{ marginTop: "15px" }}>
-            <Grid container spacing={2}>
+
+        
+          {props.exp === 'f' ? (
+            <div>
+            <h2
+                    style={{
+                      color: "rgb(62 138 190)",
+                      letterSpacing: "0.1rem",
+                      wordSpacing: "0.1rem",
+                    }}
+                  >
+                    Career Objective
+                  </h2>
+                
+            <p
+              style={{
+                color: "rgb(62 138 190)",
+                letterSpacing: "0.1rem",
+                wordSpacing: "0.1rem",
+              }}
+            >
+              {capitalize(props.description)}
+            </p>
+          </div>
+          ) :
+          <Grid container spacing={2}>
               <Grid item md={5} lg={5}>
                 <div>
                   <h2
@@ -129,7 +177,33 @@ const TemplateOne = () => {
                 </div>
               </Grid>
               <Grid item md={7} lg={7}>
+              {props.user_experience.map((exp,i) =>(
                 <div>
+                  <h3 style={{ marginBottom: "6px", fontSize: "22px" }}>
+                    {capitalize(exp.job_title)}
+                  </h3>
+                  <div>
+                  <span style={{ fontSize: "20px", fontWeight: 600 }}>
+                    {capitalize(exp.org_name)}
+                  </span>
+                  <span style={{ fontSize: "20px", fontWeight: 600, paddingLeft: '204px' }}>
+                    {exp.start_year} to {exp.end_year}
+                  </span>
+                  </div>
+                  {exp.key_points.map((points,i)=>(
+                    <ul>
+                    <li>
+                      <Typography>
+                        {capitalize(points)}
+                      </Typography>
+                    </li>
+                  </ul>
+                  ))}
+                 
+                </div>
+              ))}
+                
+                {/* <div>
                   <h3 style={{ marginBottom: "6px", fontSize: "22px" }}>
                     Designation
                   </h3>
@@ -156,37 +230,11 @@ const TemplateOne = () => {
                       </Typography>
                     </li>
                   </ul>
-                </div>
-                <div>
-                  <h3 style={{ marginBottom: "6px", fontSize: "22px" }}>
-                    Designation
-                  </h3>
-                  <span style={{ fontSize: "20px", fontWeight: 600 }}>
-                    company Name | year
-                  </span>
-                  <ul>
-                    <li>
-                      <Typography>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry
-                      </Typography>
-                    </li>
-                    <li>
-                      <Typography>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry
-                      </Typography>
-                    </li>
-                    <li>
-                      <Typography>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry
-                      </Typography>
-                    </li>
-                  </ul>
-                </div>
+                </div> */}
               </Grid>
             </Grid>
+          }
+            
           </div>
           <Divider
             style={{
@@ -214,23 +262,23 @@ const TemplateOne = () => {
               <Grid item md={7} lg={7}>
                 <div>
                   <h3 style={{ marginBottom: "6px", fontSize: "22px" }}>
-                    Highest Degree
+                    {props.qualification}
                   </h3>
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <span style={{ fontSize: "18px", fontWeight: 400 }}>
-                      University Name
+                     {props.university_name}
                     </span>
                     <span style={{ fontSize: "18px", fontWeight: 400 }}>
-                      Year
+                     {props.start_year} - {props.end_year}
                     </span>
                   </div>
                   <ul>
                     <li>
                       <Typography>
-                        I had completed (highest qualification ) with the
-                        (marks)
+                        I had completed {props.degree} with the
+                        {props.marks}
                       </Typography>
                     </li>
                   </ul>
@@ -261,20 +309,17 @@ const TemplateOne = () => {
                   <ul>
                     <li>
                       <Typography>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry
+                        
                       </Typography>
                     </li>
                     <li>
                       <Typography>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry
+                        {props.chipData}
                       </Typography>
                     </li>
                     <li>
                       <Typography>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry
+                       {props.chipData}
                       </Typography>
                     </li>
                   </ul>
@@ -283,7 +328,7 @@ const TemplateOne = () => {
             </Grid>
           </div>
         </Container>
-      </Box>
+      </Grid>
       <div></div>
     </Container>
   );
@@ -302,6 +347,15 @@ const mapstatetoProps = (state) => ({
   region: state.region,
   pin_code: state.pin_code,
   description: state.description,
+    exp: state.exp,
+  user_experience: state.user_experience,
+  qualification: state.qualification,
+  university_name: state.university_name,
+  degree: state.degree,
+  marks: state.marks,
+  start_year: state.start_year,
+  end_year: state.end_year,
+  chipData:state.chipData,
 });
 
 const mapdispatchtoProps = () => {};

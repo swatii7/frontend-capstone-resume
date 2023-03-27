@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import React from "react";
+import _ from "lodash";
 import { connect } from "react-redux";
 import {
   BtnBold,
@@ -48,6 +49,13 @@ const PersonalInfo = (props) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   //
+
+  const inputHandler = (e) => {
+    props.inputChangeHandler(e)
+
+
+  }
+
 
   /*use radio button */
   const expRadios = [
@@ -129,7 +137,6 @@ else {
           />
         </Grid>
 
- 
         {props.exp === "e" && (
           <Grid
             container
@@ -166,7 +173,7 @@ else {
                   <CustomInput
                     label="Start Year"
                     name={"start_year"}
-                    type="date"
+                    type="number"
                     placeholder="Year"
                     value={exp.start_year}
                     onchange={(e) => props.workChangeHandler(e, i)}
@@ -176,7 +183,7 @@ else {
                   <CustomInput
                     label="End Year"
                     name={"end_year"}
-                    type="date"
+                    type="number"
                     placeholder="Year"
                     value={exp.end_year}
                     onchange={(e) => props.workChangeHandler(e, i)}
@@ -224,6 +231,7 @@ else {
                 </Grid>
               </>
             ))}
+            
             <Grid item md={12} lg={12} style={{ marginTop: "25px" }}>
               <Button
                 variant="outlined"
@@ -284,6 +292,7 @@ style={{ justifyContent: "end", marginTop: "43px" }}
 };
 
 const mapstatetoProps = (state) => {
+  console.log(state)
   return {
 
     exp: state.exp,

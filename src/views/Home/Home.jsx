@@ -101,7 +101,7 @@ const Home=(props) => {
   <h2>Templates</h2>
   <p style={{}}>Select a template to get started</p>
   <div className={classes.root}>
-  <Grid container spacing={2}>
+  {/* <Grid container spacing={2}>
               {templatePreview.map((item, index) => (
                 <Grid item lg={3} md={3}
                 
@@ -136,11 +136,11 @@ const Home=(props) => {
                 </Grid>
 
               ))}
-              </Grid>
-  {/* <TemplateOne /> 
-   <TemplateTwo />
-  <TemplateThree />
-   <TemplateFour /> */}
+              </Grid> */}
+   <TemplateOne /> 
+   {/* <TemplateTwo /> */}
+  {/* <TemplateThree /> */}
+   {/* <TemplateFour />  */}
   </div>
   
  </div>

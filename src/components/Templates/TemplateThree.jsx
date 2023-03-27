@@ -16,12 +16,12 @@ export default function TemplateThree() {
   const [value, setValue] = React.useState(5);
 
   return (
-    <Container
+    <Container 
       maxWidth="md lg"
       style={{
         border: "2px solid black",
         height: "auto",
-        width: "110vh",
+        width: "1000px",
         paddingBottom: "10px",
       }}
     >

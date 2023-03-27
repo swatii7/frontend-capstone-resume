@@ -15,11 +15,11 @@ const Item = ({ theme }) => ({
 
 export default function TemplateFour() {
   return (
-    <Container
+    <Container 
       maxWidth="md lg"
       style={{ border: "2px solid black", height: "auto", width: "96vh" }}
     >
-      <Box sx={{ flexGrow: 1 }}>
+      <Grid item md={12} lg={12}>
         <div
           style={{
             textAlign: "center",
@@ -269,7 +269,7 @@ export default function TemplateFour() {
             </div>
           </Grid>
         </Grid>
-      </Box>
+      </Grid>
     </Container>
   );
 }

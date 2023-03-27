@@ -165,7 +165,8 @@ style={{ justifyContent: "end", marginTop: "43px" }}
   );
 }
 
-const mapstatetoProps= (state) =>{
+const mapstatetoProps= (state) =>{console.log(state)
+
   return{
     chipData: state.chipData
   }
