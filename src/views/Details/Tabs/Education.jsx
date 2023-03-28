@@ -104,7 +104,7 @@ const Education= (props) =>{
           <CustomInput
             label="Start Year"
             name={"start_year"}
-            type="date"
+            type="number"
             placeholder=""
             value={props.start_year}
             onchange={props.inputChangeHandler}
@@ -114,7 +114,7 @@ const Education= (props) =>{
           <CustomInput
             label="End Year"
             name={"end_year"}
-            type="date"
+            type="number"
             placeholder=""
             value={props.end_year}
             onchange={props.inputChangeHandler}

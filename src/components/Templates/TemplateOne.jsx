@@ -6,16 +6,17 @@ import Grid from "@mui/material/Grid";
 import { propsToClassKey } from "@mui/styles";
 import React from "react";
 import { connect } from "react-redux";
+import { currentDesignation } from "../../variables/common";
 
 
 /* function is used to get first character  */
-function getFirstChar (value){
+export  const  getFirstChar= (value) =>{
 return value && typeof value === "string" &&  value !== '' ?   value.charAt(0).toUpperCase() : value;
 
 }
 
 /* function is used to for capitlization */
-function capitalize (value){
+export const capitalize = (value) =>{
   return value && typeof value  === "string" &&  value !== '' ?  value.charAt(0).toUpperCase() + value.slice(1) : value;
 
 }
@@ -69,10 +70,13 @@ const TemplateOne = (props) => {
               <Grid item md={6} lg={6}>
                 <div style={{ fontSize: "22px", color: "#61a9da" }}>
                   <h3 style={{ margin: "0px 15px", fontSize: "44px" }}>
-                    {capitalize(props.first_name)} {capitalize(props.last_name)}
+                  {capitalize(props.first_name) + " "+ capitalize(props.last_name)}
                   </h3>
-                  <span style={{ margin: "10px 15px", fontSize: "25px" }}>
-                    {capitalize(props.job_title)}
+
+                  <span style={{ margin: "10px 15px", fontSize: "25px", textTransform: 'capitalize' }}>
+
+                  {/* condition impose if user have no experience then below name of user nothing show but if experienced then current positin displayed */}
+                  {props.exp !== 'f' ? currentDesignation(props.user_experience): null}
                   </span>
                 </div>
               </Grid>
@@ -85,10 +89,12 @@ const TemplateOne = (props) => {
                   }}
                 >
                   <p className="head-section" style={{ paddingTop: "11px" }}>
-                    {capitalize(props.address)}, {capitalize(props.pin_code)}
+                  {capitalize(props.address) + props.address != '' ? ', ' : props.address }
+                    { props.pin_code != '' ? props.pin_code : null }
                   </p>
                   <p className="head-section" style={{ paddingTop: "21px" }}>
-                  {props.country} {capitalize(props.region)}
+                  {capitalize(props.region) + props.region != ''? ',': null}
+                  {props.country != ''? capitalize(props.country): null} 
                   </p>
                   <p className="head-section" style={{ paddingTop: "24px" }}>
                    {props.mobile_number}                  </p>
@@ -177,19 +183,23 @@ const TemplateOne = (props) => {
                 </div>
               </Grid>
               <Grid item md={7} lg={7}>
+              {/* map function to add another work experience */}
               {props.user_experience.map((exp,i) =>(
                 <div>
                   <h3 style={{ marginBottom: "6px", fontSize: "22px" }}>
                     {capitalize(exp.job_title)}
                   </h3>
-                  <div>
+                  <div style={{display: "flex", justifyContent: "space-between"}}>
                   <span style={{ fontSize: "20px", fontWeight: 600 }}>
                     {capitalize(exp.org_name)}
                   </span>
                   <span style={{ fontSize: "20px", fontWeight: 600, paddingLeft: '204px' }}>
-                    {exp.start_year} to {exp.end_year}
+                  {(exp.start_year) + exp.start_year != '' ? '-': null}
+                  {exp.end_year != '' ? exp.end_year : null}
                   </span>
                   </div>
+
+                  {/* map function for adding key points in work experience tab */}
                   {exp.key_points.map((points,i)=>(
                     <ul>
                     <li>
@@ -203,34 +213,7 @@ const TemplateOne = (props) => {
                 </div>
               ))}
                 
-                {/* <div>
-                  <h3 style={{ marginBottom: "6px", fontSize: "22px" }}>
-                    Designation
-                  </h3>
-                  <span style={{ fontSize: "20px", fontWeight: 600 }}>
-                    company Name | year
-                  </span>
-                  <ul>
-                    <li>
-                      <Typography>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry
-                      </Typography>
-                    </li>
-                    <li>
-                      <Typography>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry
-                      </Typography>
-                    </li>
-                    <li>
-                      <Typography>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry
-                      </Typography>
-                    </li>
-                  </ul>
-                </div> */}
+              
               </Grid>
             </Grid>
           }
@@ -262,23 +245,23 @@ const TemplateOne = (props) => {
               <Grid item md={7} lg={7}>
                 <div>
                   <h3 style={{ marginBottom: "6px", fontSize: "22px" }}>
-                    {props.qualification}
+                    {capitalize(props.qualification)}
                   </h3>
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <span style={{ fontSize: "18px", fontWeight: 400 }}>
-                     {props.university_name}
+                    <span style={{ fontSize: "20px", fontWeight: 600 }}>
+                     {capitalize(props.university_name)}
                     </span>
-                    <span style={{ fontSize: "18px", fontWeight: 400 }}>
-                     {props.start_year} - {props.end_year}
+                    <span style={{ fontSize: "20px", fontWeight: 600 }}>
+                    {(props.start_year) + props.start_year != '' ? '-': null}
+                  {props.end_year != '' ? props.end_year : null}
                     </span>
                   </div>
                   <ul>
                     <li>
                       <Typography>
-                        I had completed {props.degree} with the
-                        {props.marks}
+                        I had completed {capitalize(props.degree)} with the {props.marks} % of marks.
                       </Typography>
                     </li>
                   </ul>
@@ -306,23 +289,20 @@ const TemplateOne = (props) => {
                   >
                     Key SKills
                   </h2>
-                  <ul>
+                  {/*  map function for add  key skills */}
+
+                  {props.chipData.map((data)=>(
+                    <ul>
+                    
                     <li>
                       <Typography>
-                        
+                        {capitalize(data.key)}
                       </Typography>
                     </li>
-                    <li>
-                      <Typography>
-                        {props.chipData}
-                      </Typography>
-                    </li>
-                    <li>
-                      <Typography>
-                       {props.chipData}
-                      </Typography>
-                    </li>
+                   
                   </ul>
+                  ))}
+                  
                 </div>
               </Grid>
             </Grid>
@@ -358,6 +338,6 @@ const mapstatetoProps = (state) => ({
   chipData:state.chipData,
 });
 
-const mapdispatchtoProps = () => {};
+
 
 export default connect(mapstatetoProps, null)(TemplateOne);

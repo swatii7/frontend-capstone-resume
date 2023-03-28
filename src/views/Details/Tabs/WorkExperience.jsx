@@ -7,7 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import _ from "lodash";
 import { connect } from "react-redux";
 import {
   BtnBold,

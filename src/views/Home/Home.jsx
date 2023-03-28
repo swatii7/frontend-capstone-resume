@@ -4,10 +4,10 @@ import TemplateFour from '../../components/Templates/TemplateFour'
 import TemplateOne from '../../components/Templates/TemplateOne'
 import TemplateThree from '../../components/Templates/TemplateThree'
 import TemplateTwo from '../../components/Templates/TemplateTwo'
-import ImageOne from '../../assets/TemplateImg/TemplateOne.png';
-import ImageTwo from '../../assets/TemplateImg/TemplateTwo.png';
-import ImageThree from '../../assets/TemplateImg/TemplateThree.png';
-import ImageFour from '../../assets/TemplateImg/TemplateFour.png'
+import ImageOne from '../../assets/TemplateImg/template1.png';
+import ImageTwo from '../../assets/TemplateImg/template2.png';
+import ImageThree from '../../assets/TemplateImg/template3.png';
+import ImageFour from '../../assets/TemplateImg/template4.png'
 import { makeStyles } from '@mui/styles'
 import Grid from '@mui/material/Grid';
 import { connect } from 'react-redux';
@@ -101,7 +101,7 @@ const Home=(props) => {
   <h2>Templates</h2>
   <p style={{}}>Select a template to get started</p>
   <div className={classes.root}>
-  {/* <Grid container spacing={2}>
+  <Grid container spacing={2}>
               {templatePreview.map((item, index) => (
                 <Grid item lg={3} md={3}
                 
@@ -136,8 +136,11 @@ const Home=(props) => {
                 </Grid>
 
               ))}
-              </Grid> */}
-   <TemplateOne /> 
+              </Grid>
+
+
+
+   {/* <TemplateOne />  */}
    {/* <TemplateTwo /> */}
   {/* <TemplateThree /> */}
    {/* <TemplateFour />  */}

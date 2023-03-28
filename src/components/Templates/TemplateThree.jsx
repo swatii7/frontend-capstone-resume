@@ -3,6 +3,9 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import React from "react";
+import { connect } from "react-redux";
+import { capitalize } from "./TemplateOne";
+import { currentDesignation } from "../../variables/common";
 
 const Item = ({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -12,8 +15,7 @@ const Item = ({ theme }) => ({
   color: theme.palette.text.secondary,
 });
 
-export default function TemplateThree() {
-  const [value, setValue] = React.useState(5);
+const TemplateThree = (props) => {
 
   return (
     <Container 
@@ -21,7 +23,7 @@ export default function TemplateThree() {
       style={{
         border: "2px solid black",
         height: "auto",
-        width: "1000px",
+        maxWidth: "700px",
         paddingBottom: "10px",
       }}
     >
@@ -46,110 +48,107 @@ export default function TemplateThree() {
               }}
             >
               <h3 style={{ fontSize: "25px", letterSpacing: "0.2rem" }}>
-                Swati Chaudhary
+                {(props.first_name) + " " + (props.last_name)}
               </h3>
               <span
                 style={{
                   letterSpacing: "0.2rem",
                   fontSize: "20px",
                   color: "#d4cece",
+                  textTransform:' capitalize'
                 }}
               >
-                Web Developer
+                {props.exp !== 'f' ? currentDesignation(props.user_experience): null}
+
               </span>
             </div>
             <div style={{ paddingTop: "50px" }}>
               <h2 style={{ fontSize: "22px", letterSpacing: "0.2rem" }}>
                 Details
               </h2>
-              <p>Address</p>
-              <p>Contact Number</p>
-              <p>Email id</p>
+              <p>
+                {capitalize(props.address) + ' , ' + capitalize(props.pin_code)}
+              </p>
+              <p>
+                {capitalize(props.region) + ' , ' + capitalize(props.country)}
+              </p>
+              <p>
+                {props.mobile_number}
+              </p>
+              <p>
+              {props.email}
+                </p>
             </div>
             <div>
-              <h2>Skills</h2>
-              <ul>
+            <h2 style={{ fontSize: "22px", letterSpacing: "0.2rem", paddingTop: '66px' }}>
+                Skills
+              </h2>
+              {props.chipData.map((data) =>(
+                <ul>
                 <li>
-                  <Typography>React</Typography>
+                  <Typography>
+                    {capitalize(data.key)}
+                  </Typography>
                 </li>
-                <li>
-                  <Typography>HTML</Typography>
-                </li>
-                <li>
-                  <Typography>CSS</Typography>
-                </li>
-                <li>
-                  <Typography>Angular</Typography>
-                </li>
+                
               </ul>
+              ))}
+             
             </div>
           </Grid>
           <Grid item lg={7} md={7} style={{ marginTop: "28px" }}>
             <div>
               <h2>Profile</h2>
               <p style={{ textAlign: "justify" }}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged.
+               {capitalize(props.description)}
               </p>
             </div>
             <div>
               <h2>Work Experience</h2>
-              <div>
-                <h3>Company Name | year</h3>
-                <ul>
+              {props.exp === 'f'? (
+                <div>
+                  <p> 
+                 I have no work experience. I am coming here to get experience with your guidance and support. I have a ability to cope with different situations.
+                 
+                  </p>
+                </div>
+              ) : <div>
+              {props.user_experience.map((exp,i) =>(
+                <div>
+                <h4>
+                  {capitalize(exp.job_title)}
+                </h4>
+                <h4>
+                  {capitalize(exp.org_name) + ' | ' + (exp.start_year)+ ' - ' + (exp.end_year)}
+                </h4>
+                {exp.key_points.map((points,i)=> (
+                  <ul>
                   <li>
                     <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
+                      {capitalize(points)}
                     </Typography>
                   </li>
-                  <li>
-                    <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
-                    </Typography>
-                  </li>
-                  <li>
-                    <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
-                    </Typography>
-                  </li>
+                 
                 </ul>
+                ))}
+                
+                </div>
+              ))}
+                
               </div>
-              <div>
-                <h3>Company Name | year</h3>
-                <ul>
-                  <li>
-                    <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
-                    </Typography>
-                  </li>
-                  <li>
-                    <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
-                    </Typography>
-                  </li>
-                  <li>
-                    <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
-                    </Typography>
-                  </li>
-                </ul>
-              </div>
+              }
             </div>
             <div>
               <h2>Education</h2>
-              <h3>University Name | year </h3>
-              <p>Degree</p>
-              <p>Marks</p>
+              <h3>
+              {capitalize(props.university_name) + " | " + (props.start_year) + ' - ' +(props.end_year)}
+               </h3>
+              <p>
+                {capitalize(props.degree)}
+              </p>
+              <p>
+                I had completed {capitalize(props.qualification)} with the {props.marks} % of marks.
+              </p>
             </div>
           </Grid>
         </Grid>
@@ -157,3 +156,32 @@ export default function TemplateThree() {
     </Container>
   );
 }
+
+const mapstatetoProps = (state) => ({
+  amount: state.amount,
+  first_name: state.first_name,
+  last_name: state.last_name,
+  email: state.email,
+  mobile_number: state.mobile_number,
+  checked: state.checked,
+  gender: state.gender,
+  marital_status: state.marital_status,
+  address: state.address,
+  country: state.country,
+  region: state.region,
+  pin_code: state.pin_code,
+  description: state.description,
+    exp: state.exp,
+  user_experience: state.user_experience,
+  qualification: state.qualification,
+  university_name: state.university_name,
+  degree: state.degree,
+  marks: state.marks,
+  start_year: state.start_year,
+  end_year: state.end_year,
+  chipData:state.chipData,
+});
+
+const mapdispatchtoProps = () => {};
+
+export default connect(mapstatetoProps, null)(TemplateThree);

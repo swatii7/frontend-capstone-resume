@@ -4,6 +4,9 @@ import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import React from "react";
+import { connect } from "react-redux";
+import { capitalize } from "./TemplateOne";
+q
 
 const Item = ({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -13,11 +16,11 @@ const Item = ({ theme }) => ({
   color: theme.palette.text.secondary,
 });
 
-export default function TemplateFour() {
+const TemplateFour = (props) => {
   return (
     <Container 
       maxWidth="md lg"
-      style={{ border: "2px solid black", height: "auto", width: "96vh" }}
+      style={{ border: "2px solid black", height: "auto", maxWidth: "700px" }}
     >
       <Grid item md={12} lg={12}>
         <div
@@ -25,7 +28,7 @@ export default function TemplateFour() {
             textAlign: "center",
             border: "2px solid black",
             position: "absolute",
-            margin: "46px 273px",
+            margin: "46px 109px",
             padding: "21px 83px",
           }}
         >
@@ -39,10 +42,10 @@ export default function TemplateFour() {
               wordSpacing: "0.2rem",
             }}
           >
-            swati chaudhary
+            {(props.first_name) + " " + (props.last_name)}
           </h3>
-          <span style={{ fontSize: "20px", color: "#626161" }}>
-            Web Developer
+          <span style={{ fontSize: "20px", color: "#626161" ,textTransform: 'capitalize' }}>
+           {props.exp !== 'f' ? currentDesignation(props.user_experience): null}
           </span>
         </div>
         <Grid container spacing={2}>
@@ -83,8 +86,13 @@ export default function TemplateFour() {
                 >
                   Address
                 </h4>
-                <p>123, AnyWhere, AnyCity</p>
-                <p>PinCode</p>
+                <p>
+                  {capitalize(props.address) + props.address != '' ? ', ' : null }
+                 { props.pin_code != '' ? props.pin_code : null }
+                </p>
+                <p>
+                  {capitalize(props.region) + ' , ' + (props.country)}
+                </p>
               </span>
               <span>
                 <h4
@@ -96,7 +104,9 @@ export default function TemplateFour() {
                 >
                   Contact Number
                 </h4>
-                <p>8346-123-456</p>
+                <p>
+                {props.mobile_number}
+                </p>
               </span>
               <span>
                 <h4
@@ -108,7 +118,9 @@ export default function TemplateFour() {
                 >
                   Email id
                 </h4>
-                <p>xyz@gmail.com</p>
+                <p>
+                  {props.email}
+                </p>
               </span>
             </div>
             <div style={{ paddingTop: "25px" }}>
@@ -126,10 +138,11 @@ export default function TemplateFour() {
                   marginBottom: "21px",
                 }}
               />
-              <p>HTML</p>
-              <p>CSS</p>
-              <p>React</p>
-              <p>Angular</p>
+              {props.chipData.map((data) => (
+                <ul>
+                  <li>{capitalize(data.key)}</li>
+                </ul>
+              ))}
             </div>
           </Grid>
           <Grid
@@ -154,12 +167,7 @@ export default function TemplateFour() {
                 }}
               />
               <p style={{ textAlign: "justify" }}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged.
+                {capitalize(props.description)}
               </p>
             </div>
             <div>
@@ -177,7 +185,16 @@ export default function TemplateFour() {
                   marginBottom: "21px",
                 }}
               />
-              <div>
+              {props.exp === 'f'? (
+                <div>
+                  <p> 
+                 I have no work experience. I am coming here to get experience with your guidance and support. I have a ability to cope with different situations.
+                 
+                  </p>
+                </div>
+              ) : <div>
+              {props.user_experience.map((exp,i) =>(
+                <div>
                 <h4
                   style={{
                     textTransform: "uppercase",
@@ -185,30 +202,8 @@ export default function TemplateFour() {
                     letterSpacing: "0.2rem",
                   }}
                 >
-                  Company Name | year
+                  {exp.job_title}
                 </h4>
-                <ul>
-                  <li>
-                    <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
-                    </Typography>
-                  </li>
-                  <li>
-                    <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
-                    </Typography>
-                  </li>
-                  <li>
-                    <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
-                    </Typography>
-                  </li>
-                </ul>
-              </div>
-              <div>
                 <h4
                   style={{
                     textTransform: "uppercase",
@@ -216,29 +211,26 @@ export default function TemplateFour() {
                     letterSpacing: "0.2rem",
                   }}
                 >
-                  Company Name | year
+                  {(exp.org_name) + ' | ' + (exp.start_year)+ ' - ' + (exp.end_year)}
                 </h4>
-                <ul>
+                {exp.key_points.map((points,i)=> (
+                  <ul>
                   <li>
                     <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
+                      {capitalize(points)}
                     </Typography>
                   </li>
-                  <li>
-                    <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
-                    </Typography>
-                  </li>
-                  <li>
-                    <Typography>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry
-                    </Typography>
-                  </li>
+                 
                 </ul>
+                ))}
+                
+                </div>
+              ))}
+                
               </div>
+              }
+              
+       
             </div>
             <div>
               <h3
@@ -262,10 +254,14 @@ export default function TemplateFour() {
                   letterSpacing: "0.2rem",
                 }}
               >
-                University Name | year{" "}
+                {(props.university_name) + ' | ' + (props.start_year) + ' - ' + (props.end_year)}
               </h4>
-              <p>Degree</p>
-              <p>Marks</p>
+              <p>
+              {props.degree}
+              </p>
+              <p>
+              I had completed {capitalize(props.qualification)} with the {props.marks} % of marks.
+              </p>
             </div>
           </Grid>
         </Grid>
@@ -274,4 +270,32 @@ export default function TemplateFour() {
   );
 }
 
-// #6c6c6c00
+const mapstatetoProps = (state) => ({
+  amount: state.amount,
+  first_name: state.first_name,
+  last_name: state.last_name,
+  email: state.email,
+  mobile_number: state.mobile_number,
+  checked: state.checked,
+  gender: state.gender,
+  marital_status: state.marital_status,
+  address: state.address,
+  country: state.country,
+  region: state.region,
+  pin_code: state.pin_code,
+  description: state.description,
+    exp: state.exp,
+  user_experience: state.user_experience,
+  qualification: state.qualification,
+  university_name: state.university_name,
+  degree: state.degree,
+  marks: state.marks,
+  start_year: state.start_year,
+  end_year: state.end_year,
+  chipData:state.chipData,
+});
+
+const mapdispatchtoProps = () => {};
+
+export default connect(mapstatetoProps, null)(TemplateFour);
+
