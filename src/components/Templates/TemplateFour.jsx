@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import React from "react";
 import { connect } from "react-redux";
 import { capitalize } from "./TemplateOne";
-q
+
 
 const Item = ({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",

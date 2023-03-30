@@ -24,7 +24,9 @@ export const capitalize = (value) =>{
 const TemplateOne = (props) => {
 
   return (
-    <Container>
+    <Container
+    
+    >
 
 
       <Grid item md={12} lg={12}  sx={{ width: "1000px", height: "auto", border: "2px solid #e4e0e0" }}>
@@ -89,11 +91,11 @@ const TemplateOne = (props) => {
                   }}
                 >
                   <p className="head-section" style={{ paddingTop: "11px" }}>
-                  {capitalize(props.address) + props.address != '' ? ', ' : props.address }
+                  { props.address != '' ? capitalize(props.address) + ', ' : props.address }
                     { props.pin_code != '' ? props.pin_code : null }
                   </p>
                   <p className="head-section" style={{ paddingTop: "21px" }}>
-                  {capitalize(props.region) + props.region != ''? ',': null}
+                  { props.region != ''? capitalize(props.region) + ',': null}
                   {props.country != ''? capitalize(props.country): null} 
                   </p>
                   <p className="head-section" style={{ paddingTop: "24px" }}>

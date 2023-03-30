@@ -157,8 +157,8 @@ const Preview = (props) => {
         html2canvas(input)
             .then((canvas) => {
                 var imgData = canvas.toDataURL('image/png');
-                var imgWidth = 335;
-                var pageHeight = 482.6;
+                var imgWidth = 400;
+                var pageHeight = 490.6;
                 /// 1-> 375
                 var imgWidth = 375;
                 var pageHeight = 450.6;
@@ -168,7 +168,7 @@ const Preview = (props) => {
                     // unit: 'in', format: [10, 10], orientation: 'p'
                     orientation: 'p',
                     unit: 'mm',
-                    format: [330.2, 450.6],
+                    format: [320, 350.6],
                  
                       
                   
@@ -177,12 +177,12 @@ const Preview = (props) => {
                   top: 50,
                 }
                 var position = 0;
-                doc.addImage(imgData, 'PNG', 1, 1, imgWidth - 2, imgHeight,);
+                doc.addImage(imgData, 'PNG', 1, 1, imgWidth - 1, imgHeight,);
                 heightLeft -= pageHeight;
                 while (heightLeft >= 0) {
                     position = heightLeft - imgHeight;
                     doc.addPage();
-                    doc.addImage(imgData, 'PNG', 2, position, imgWidth - 2, imgHeight-20,);
+                    doc.addImage(imgData, 'PNG', 2, position, imgWidth - 1, imgHeight-20,);
                     heightLeft -= pageHeight;
                 }
                 // doc.save('qrCode.pdf');
