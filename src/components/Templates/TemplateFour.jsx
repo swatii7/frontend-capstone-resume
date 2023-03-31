@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import React from "react";
 import { connect } from "react-redux";
 import { capitalize } from "./TemplateOne";
+import { currentDesignation } from "../../variables/common";
 
 
 const Item = ({ theme }) => ({
@@ -87,11 +88,12 @@ const TemplateFour = (props) => {
                   Address
                 </h4>
                 <p>
-                  {capitalize(props.address) + props.address != '' ? ', ' : null }
-                 { props.pin_code != '' ? props.pin_code : null }
+                { props.address != '' ? capitalize(props.address) + ', ' : props.address }
+                    { props.pin_code != '' ? props.pin_code : null }
                 </p>
                 <p>
-                  {capitalize(props.region) + ' , ' + (props.country)}
+                { props.region != ''? capitalize(props.region) + ',': null}
+                  {props.country != ''? capitalize(props.country): null} 
                 </p>
               </span>
               <span>
@@ -211,7 +213,9 @@ const TemplateFour = (props) => {
                     letterSpacing: "0.2rem",
                   }}
                 >
-                  {(exp.org_name) + ' | ' + (exp.start_year)+ ' - ' + (exp.end_year)}
+                  {exp.org_name != ""? capitalize(exp.org_name) + ' | ' :  exp.org_name}
+              {exp.start_year != ''? exp.start_year + ' - ' : exp.start_year}
+              {exp.end_year != '' ? exp.end_year : null}
                 </h4>
                 {exp.key_points.map((points,i)=> (
                   <ul>
@@ -254,7 +258,9 @@ const TemplateFour = (props) => {
                   letterSpacing: "0.2rem",
                 }}
               >
-                {(props.university_name) + ' | ' + (props.start_year) + ' - ' + (props.end_year)}
+                {props.university_name != ""? capitalize(props.university_name) + ' | ' :  props.university_name}
+              {props.start_year != ''? props.start_year + ' - ' : props.start_year}
+              {props.end_year != '' ? props.end_year : null}
               </h4>
               <p>
               {props.degree}

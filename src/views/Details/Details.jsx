@@ -65,9 +65,7 @@ const VerticalTabs= (props)=> {
      <Grid item xs={12} md={4} lg={3}>
       <Tabs
         orientation="vertical"
-        //variant="scrollable"
         value={props.activeTab}
-        //onChange={handleChange}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider'}}
         className={classes.tabsBtnWrapper}

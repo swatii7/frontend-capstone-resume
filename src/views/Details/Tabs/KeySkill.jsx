@@ -103,7 +103,7 @@ if(props.chipData.length < 3
       </Paper>
 
       <Grid container rowSpacing={1} columnSpacing={{ lg: 3, md: 3 }}>
-        <Grid item md={12} lg={12} style={{ marginTop: "55px" }}>
+        <Grid item xs={12} md={12} lg={12} style={{ marginTop: "55px" }}>
           <CustomInput
             label="Add Skill"
             name={"skill"}

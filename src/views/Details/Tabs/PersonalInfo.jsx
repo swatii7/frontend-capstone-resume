@@ -35,6 +35,21 @@ const useStyles = makeStyles(() => ({
   },
 
 
+  root:{
+
+    '@media(max-width: 600px)' : {
+      "& .sectionHeading": {
+        fontSize: '2rem !important',
+        textAlign: 'center',
+      },
+
+      "& .MuiGrid-root.MuiGrid-container":{
+          justifyContent:'center'
+      }
+    }
+  }
+
+
 }));
 
 
@@ -115,8 +130,8 @@ const PersonalInfo = (props) => {
 
 
   return (
-    <div>
-      <Typography variant="h3" style={{ color: '#9f4545', marginBottom: '40px' }}>
+    <div className={classes.root}>
+      <Typography className="sectionHeading" variant="h3" style={{ color: '#9f4545', marginBottom: '40px' }}>
         About Yourself
       </Typography>
       <Grid container rowSpacing={1} columnSpacing={{ lg: 3, md: 3 }}>
@@ -173,7 +188,7 @@ const PersonalInfo = (props) => {
           
            />
         </Grid>
-        <Grid item md={12} lg={12} style={{ marginTop: '15px' }}>
+        <Grid item xs= {12} md={12} lg={12} style={{ marginTop: '15px' }}>
         <CustomInput label="Objective" name={'description'} type='text' placeholder="Motivated, teamwork-oriented, and responsible Data Analyst with significant experience in increasing comprehension of
 reports and presentations by the average professional. Highly educated, possessing a Bachelor's, a Master's, and professional
 certification in business analytics and statistics. Bilingual in English and Tagalog, with an intermediate understanding of

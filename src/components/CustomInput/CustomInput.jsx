@@ -10,7 +10,24 @@ import { makeStyles } from '@mui/styles'
 const useStyles = makeStyles(() => ({
 
   root: {
-    width: '80% !important'
+    width: '80% !important',
+    '@media(max-width: 600px)' : {
+      width: '100% !important',
+    },
+
+   
+    "& .MuiInputLabel-root":{
+     fontSize: '22px',
+
+    },
+    "& .MuiInputLabel-root.MuiInputLabel-formControl.Mui-focused":{
+      color:'#00000099 !important',
+
+    },
+
+
+
+
   }
 }
 
@@ -20,6 +37,7 @@ const useStyles = makeStyles(() => ({
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
     marginTop: theme.spacing(3),
+    color:'#00000099',
   },
   '& .MuiInputBase-input': {
     borderRadius: 4,
@@ -49,10 +67,17 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     ].join(','),
     '&:focus': {
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: theme.palette.primary.main,
+      border: '1px solid #ced4da',
+      color:'#00000099',
     },
   },
 
+
+
+  
+label:{
+  color:'#00000099',
+}
 }));
 
 
@@ -68,7 +93,7 @@ export default function CustomInput(props) {
         <BootstrapInput name={props.name} type={props.type} placeholder={props.placeholder} value={props.value} onChange={props.onchange}  multiline={props.multiline} minRows={props.minRows} maxRows={props.maxRows} />
         :
         <FormControl variant="standard" className={classes.root}>
-          {props.label !== "" && <InputLabel shrink htmlFor="bootstrap-input">
+          {props.label !== "" && <InputLabel shrink htmlFor="bootstrap-input" className={classes.label}>
             {props.label}
           </InputLabel>}
           <BootstrapInput name={props.name} type={props.type} placeholder={props.placeholder} value={props.value} onChange={props.onchange}  multiline={props.multiline} minRows={props.minRows} maxRows={props.maxRows} />

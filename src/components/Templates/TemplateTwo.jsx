@@ -72,10 +72,12 @@ const TemplateTwo = (props) => {
                 }}
               >
                <p className="head-section" style={{ paddingTop: "11px" }}>
-                    {capitalize(props.address) + " , " + capitalize(props.pin_code)}
+               { props.address != '' ? capitalize(props.address) + ', ' : props.address }
+                    { props.pin_code != '' ? props.pin_code : null }
                   </p>
                   <p className="head-section" style={{ paddingTop: "21px" }}>
-                  {capitalize(props.region)+ " , " + props.country} 
+                  { props.region != ''? capitalize(props.region) + ',': null}
+                  {props.country != ''? capitalize(props.country): null} 
                   </p>
                 <p className="head-section" style={{ paddingTop: "24px" }}>
                   {props.mobile_number}
@@ -120,34 +122,7 @@ const TemplateTwo = (props) => {
     </Grid>
     </Box>
 
-        <div style={{padding: '0px 16px'}}>
-        {props.exp === 'f'? (
-          <div>
-          <h2 style={{color: "#9b536f", letterSpacing: "0.1rem", wordSpacing: "0.1rem", marginBottom: '0px'}}>Career Objective</h2>
-          <Divider
-          style={{
-            borderWidth: "3px",
-            backgroundColor: "#9b536f",
-            opacity: "0.9",
-          }}
-        />
-         <p
-              style={{
-                letterSpacing: "0.1rem",
-                wordSpacing: "0.1rem", 
-                backgroundColor: "#fff",
-  marginLeft: "0px",
-  marginTop: "0px",
-  padding: '23px 2px',
-  color: '#000',
-  textAlign: "justify"
-              }}
-            >
-             {capitalize(props.description)}
-            </p>
-
-          </div>
-        ):     <div>
+    <div>
           <h2 style={{color: "#9b536f", letterSpacing: "0.1rem", wordSpacing: "0.1rem", marginBottom: '0px'}}>Professional Experience</h2>
           <Divider
           style={{
@@ -156,46 +131,60 @@ const TemplateTwo = (props) => {
             opacity: "0.9",
           }}
         />
-         {props.user_experience.map((exp,i) =>(
+        {props.exp === 'f'? (
+          <div>
+                  <p style={{
+                letterSpacing: "0.1rem",
+                wordSpacing: "0.1rem",
+                paddingLeft: '25px'
+              }}> 
+                 I have no work experience. I am coming here to get experience with your guidance and support. I have a ability to cope with different situations.
+                 
+                  </p>
+                </div>
+        ):
+        props.user_experience.map((exp,i) =>(
           
 
-        <Grid container spacing={2}
-        style= {{padding: '0px 26px'}}>
-       
-          <Grid item md={5} lg= {5}>
-      <div style={{marginTop: '22px'}}>
-      <span style={{fontSize: "20px", fontWeight: 600 }}>
-        {(exp.start_year) + " - " + (exp.end_year)}
-      </span>
-      </div>
-      
-      </Grid>
-      <Grid item md={7} lg= {7}>
-      
-        <div>
-          <h3 style={{marginBottom: '6px', fontSize:'22px'}}>
-            {capitalize(exp.job_title)}
-          </h3>
-          <span style={{fontSize: "20px", fontWeight: 600 }}>
-            {capitalize(exp.org_name)}
-          </span>
-
-          {exp.key_points.map((points, index) =>(
-            <ul>
-          <li><Typography>{capitalize(points)}</Typography></li>
+          <Grid container spacing={2}
+          style= {{padding: '0px 26px'}}>
          
-            
-          </ul>
-          ))}
-          
+            <Grid item md={5} lg= {5}>
+        <div style={{marginTop: '22px'}}>
+        <span style={{fontSize: "20px", fontWeight: 600 }}>
+        {exp.start_year != '' ? (exp.start_year) + '-': exp.start_year}
+                    {exp.end_year != '' ? exp.end_year : null}
+        </span>
         </div>
-      </Grid>
-          
-          </Grid>
-        ))}
+        
+        </Grid>
+        <Grid item md={7} lg= {7}>
+        
+          <div>
+            <h3 style={{marginBottom: '6px', fontSize:'22px'}}>
+              {capitalize(exp.job_title)}
+            </h3>
+            <span style={{fontSize: "20px", fontWeight: 600 }}>
+              {capitalize(exp.org_name)}
+            </span>
+  
+            {exp.key_points.map((points, index) =>(
+              <ul>
+            <li><Typography>{capitalize(points)}</Typography></li>
+           
+              
+            </ul>
+            ))}
+            
+          </div>
+        </Grid>
+            
+            </Grid>
+          ))}
+        
+        
        </div>
-        }
-       </div>
+      
 
 
 
@@ -215,7 +204,8 @@ const TemplateTwo = (props) => {
       <Grid item md={5} lg= {5}>
       <div style={{marginTop: '22px'}}>
       <span style={{fontSize: "18px", fontWeight: 600 }}>
-        {(props.start_year)  + " - " + (props.end_year)}
+      {props.start_year != '' ? (props.start_year) + '-': props.start_year}
+                  {props.end_year != '' ? props.end_year : null}
       </span>
       </div>
        

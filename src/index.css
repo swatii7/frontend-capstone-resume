@@ -80,3 +80,9 @@ a:hover {
   line-height: 0 ;
   
 }
+
+p{
+  letter-spacing: 0.1rem !important;
+    word-spacing: 0.1rem !important;
+
+}

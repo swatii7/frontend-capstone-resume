@@ -116,6 +116,7 @@ export default function About() {
           item
           lg={6}
           md={6}
+          xs= {10}
           style={{ display: "flex", justifyContent: "center" }}
         >
           <div style={{ width: "440px" }}>

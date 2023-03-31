@@ -120,8 +120,6 @@ const TemplateOne = (props) => {
               opacity: "0.9",
             }}
           />
-
-          {props.exp === 'e' &&(
             <div>
             <p
               style={{
@@ -140,36 +138,7 @@ const TemplateOne = (props) => {
             }}
           />
           </div>
-          
-          )}
-         
-         
-          <div style={{ marginTop: "15px" }}>
-
-        
-          {props.exp === 'f' ? (
-            <div>
-            <h2
-                    style={{
-                      color: "rgb(62 138 190)",
-                      letterSpacing: "0.1rem",
-                      wordSpacing: "0.1rem",
-                    }}
-                  >
-                    Career Objective
-                  </h2>
-                
-            <p
-              style={{
-                color: "rgb(62 138 190)",
-                letterSpacing: "0.1rem",
-                wordSpacing: "0.1rem",
-              }}
-            >
-              {capitalize(props.description)}
-            </p>
-          </div>
-          ) :
+  
           <Grid container spacing={2}>
               <Grid item md={5} lg={5}>
                 <div>
@@ -184,6 +153,18 @@ const TemplateOne = (props) => {
                   </h2>
                 </div>
               </Grid>
+              {props.exp === 'f'? (
+                <div>
+                  <p style={{
+                letterSpacing: "0.1rem",
+                wordSpacing: "0.1rem",
+                paddingLeft: '25px'
+              }}> 
+                 I have no work experience. I am coming here to get experience with your guidance and support. I have a ability to cope with different situations.
+                 
+                  </p>
+                </div>
+              ):
               <Grid item md={7} lg={7}>
               {/* map function to add another work experience */}
               {props.user_experience.map((exp,i) =>(
@@ -196,7 +177,7 @@ const TemplateOne = (props) => {
                     {capitalize(exp.org_name)}
                   </span>
                   <span style={{ fontSize: "20px", fontWeight: 600, paddingLeft: '204px' }}>
-                  {(exp.start_year) + exp.start_year != '' ? '-': null}
+                  {exp.start_year != '' ? (exp.start_year) + '-': exp.start_year}
                   {exp.end_year != '' ? exp.end_year : null}
                   </span>
                   </div>
@@ -217,10 +198,10 @@ const TemplateOne = (props) => {
                 
               
               </Grid>
+              }
+
             </Grid>
-          }
-            
-          </div>
+
           <Divider
             style={{
               borderWidth: "5px",
@@ -256,7 +237,7 @@ const TemplateOne = (props) => {
                      {capitalize(props.university_name)}
                     </span>
                     <span style={{ fontSize: "20px", fontWeight: 600 }}>
-                    {(props.start_year) + props.start_year != '' ? '-': null}
+                    {props.start_year != '' ? (props.start_year) + '-': props.start_year}
                   {props.end_year != '' ? props.end_year : null}
                     </span>
                   </div>

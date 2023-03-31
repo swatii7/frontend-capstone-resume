@@ -51,6 +51,7 @@ const Education= (props) =>{
   return (
     <div>
       <Typography
+       className="sectionHeading"
         variant="h3"
         style={{ color: "#9f4545", marginBottom: "40px" }}
       >

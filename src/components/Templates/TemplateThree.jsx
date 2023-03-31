@@ -67,10 +67,12 @@ const TemplateThree = (props) => {
                 Details
               </h2>
               <p>
-                {capitalize(props.address) + ' , ' + capitalize(props.pin_code)}
+              { props.address != '' ? capitalize(props.address) + ', ' : props.address }
+                    { props.pin_code != '' ? props.pin_code : null }
               </p>
               <p>
-                {capitalize(props.region) + ' , ' + capitalize(props.country)}
+              { props.region != ''? capitalize(props.region) + ',': null}
+                  {props.country != ''? capitalize(props.country): null} 
               </p>
               <p>
                 {props.mobile_number}
@@ -119,7 +121,11 @@ const TemplateThree = (props) => {
                   {capitalize(exp.job_title)}
                 </h4>
                 <h4>
-                  {capitalize(exp.org_name) + ' | ' + (exp.start_year)+ ' - ' + (exp.end_year)}
+
+              {exp.org_name != ""? capitalize(exp.org_name) + ' | ' :  exp.org_name}
+              {exp.start_year != ''? exp.start_year + ' - ' : exp.start_year}
+              {exp.end_year != '' ? exp.end_year : null}
+                  {/* {capitalize(exp.org_name) + ' | ' + (exp.start_year)+ ' - ' + (exp.end_year)} */}
                 </h4>
                 {exp.key_points.map((points,i)=> (
                   <ul>
@@ -131,7 +137,7 @@ const TemplateThree = (props) => {
                  
                 </ul>
                 ))}
-                
+                  
                 </div>
               ))}
                 
@@ -141,7 +147,9 @@ const TemplateThree = (props) => {
             <div>
               <h2>Education</h2>
               <h3>
-              {capitalize(props.university_name) + " | " + (props.start_year) + ' - ' +(props.end_year)}
+              {props.university_name != ""? capitalize(props.university_name) + ' | ' :  props.university_name}
+              {props.start_year != ''? props.start_year + ' - ' : props.start_year}
+              {props.end_year != '' ? props.end_year : null}
                </h3>
               <p>
                 {capitalize(props.degree)}

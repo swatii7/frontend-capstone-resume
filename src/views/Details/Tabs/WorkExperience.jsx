@@ -42,6 +42,20 @@ const useStyles = makeStyles(() => ({
       width: "80.3%",
     },
   },
+
+  root:{
+
+    '@media(max-width: 600px)' : {
+      "& .sectionHeading": {
+        fontSize: '2rem !important',
+        textAlign: 'center',
+      },
+
+      "& .MuiGrid-root.MuiGrid-container":{
+          justifyContent:'center'
+      }
+    }
+  }
 }));
 
 const PersonalInfo = (props) => {
@@ -117,8 +131,9 @@ else {
   
 
   return (
-    <div>
+    <div className={classes.root}>
       <Typography
+       className="sectionHeading"
         variant="h3"
         style={{ color: "#9f4545", marginBottom: "40px" }}
       >
@@ -192,10 +207,10 @@ else {
 
                 {exp.key_points.map((points, keyPointIndex) => (
                   <>
-                    <Grid item md={9} lg={9} style={{ marginTop: "25px" }}>
+                    <Grid item xs= {10} md={9} lg={9} style={{ marginTop: "25px" }}>
                       <div dangerouslySetInnerHTML={{ __html: points }}></div>
                     </Grid>
-                    <Grid item md={2} lg={2} style={{ marginTop: "25px" }}>
+                    <Grid item xs= {2} md={2} lg={2} style={{ marginTop: "25px" }}>
                       <RemoveCircleOutlineIcon
                         onClick={(e) =>
                           props.removeKeyHandler(i, keyPointIndex)
@@ -205,7 +220,7 @@ else {
                   </>
                 ))}
 
-                <Grid item md={9} lg={9} style={{ marginTop: "25px" }}>
+                <Grid item xs={10} md={9} lg={9} style={{ marginTop: "25px" }}>
                   <EditorProvider>
                     <Editor
                       name="key_note"
@@ -220,7 +235,7 @@ else {
                   </EditorProvider>
                 </Grid>
 
-                <Grid item md={2} lg={2} style={{ marginTop: "25px" }}>
+                <Grid xs= {2} item md={2} lg={2} style={{ marginTop: "25px" }}>
                   <IconButton
                     onClick={(e) => props.addKeyHandler(i)}
                     aria-label="delete"
