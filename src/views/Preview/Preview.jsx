@@ -37,6 +37,16 @@ const styles = makeStyles(() => ({
       color: "white",
       cursor: "pointer",
     },
+    "@media(max-width: 600px)": {
+      "& .sectionHeading": {
+        fontSize: "2rem !important",
+        textAlign: "center",
+      },
+
+      "& .MuiGrid-root.MuiGrid-container": {
+        justifyContent: "center",
+      },
+    },
     "& .overlay": {
       position: "absolute",
       top: "0",
@@ -137,7 +147,6 @@ const Preview = (props) => {
 
   //jsPDF Generator function
   const jspdfGenerator = () => {
-
     //here condition is impose user must enter file name
     if (fileName === "") {
       enqueueSnackbar("Enter valid file name");
@@ -160,7 +169,7 @@ const Preview = (props) => {
         orientation: "p",
         unit: "mm",
         format: [320, 350.6],
-      })
+      });
       var position = 0;
       doc.addImage(imgData, "PNG", 1, 1, imgWidth - 1, imgHeight);
       heightLeft -= pageHeight;
@@ -176,8 +185,9 @@ const Preview = (props) => {
   };
 
   return (
-    <>
+    <div className={classes.root}>
       <Typography
+        className="sectionHeading"
         variant="h3"
         style={{ color: "#9f4545", marginBottom: "80px" }}
       >
@@ -226,7 +236,7 @@ const Preview = (props) => {
           </Grid>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 };
 

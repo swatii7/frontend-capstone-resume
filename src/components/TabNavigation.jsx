@@ -1,11 +1,9 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import * as React from "react";
 import { connect } from "react-redux";
 import * as storeActions from "../store/action-creator";
-// import Snackbar from '@mui/material/Snackbar';
-// import MuiAlert from '@mui/material/Alert';
 
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText("rgb(159, 69, 69)"),
@@ -16,52 +14,33 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 const TabNavigation = (props) => {
-
-  const Alert = React.forwardRef(function Alert(
-    props,
-    ref,  
-  ) {
+  const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-  
-  
-    const [open, setOpen] = React.useState(false);
-    // const [alertMessage, setAlertMessage]= useState()
-  
-    const handleClick = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-  
-      setOpen(false);
-    };
+
+  const [open, setOpen] = React.useState(false);
 
 
-  // const nextTabHandler= (tabIndex) =>{
-  //   console.log(tabIndex)
-  //   if(state.first_name === ""){
-  //     setAlertMessage('First name is required')
-  //   }
-    
+  const handleClick = () => {
+    setOpen(true);
+  };
 
-  // }
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
 
   return (
-
     <Stack
       spacing={2}
       direction="row"
       style={{ justifyContent: "end", marginTop: "43px" }}
     >
-    {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-        {alertMessage}
-        </Alert>
-      </Snackbar> */}
+
       {props.disableBack ? null : (
         <Button
           variant="text"
@@ -112,9 +91,8 @@ const mapstatetoProps = (state) => {
     country: state.country,
     region: state.region,
     pin_code: state.pin_code,
-    description : state.description
+    description: state.description,
   };
-
 };
 
 const mapdispatchtoProps = (dispatch) => {

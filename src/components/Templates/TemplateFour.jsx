@@ -1,13 +1,11 @@
-import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import React from "react";
 import { connect } from "react-redux";
-import { capitalize } from "./TemplateOne";
 import { currentDesignation } from "../../variables/common";
-
+import { capitalize } from "./TemplateOne";
 
 const Item = ({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -19,7 +17,7 @@ const Item = ({ theme }) => ({
 
 const TemplateFour = (props) => {
   return (
-    <Container 
+    <Container
       maxWidth="md lg"
       style={{ border: "2px solid black", height: "auto", maxWidth: "700px" }}
     >
@@ -43,10 +41,18 @@ const TemplateFour = (props) => {
               wordSpacing: "0.2rem",
             }}
           >
-            {(props.first_name) + " " + (props.last_name)}
+            {props.first_name + " " + props.last_name}
           </h3>
-          <span style={{ fontSize: "20px", color: "#626161" ,textTransform: 'capitalize' }}>
-           {props.exp !== 'f' ? currentDesignation(props.user_experience): null}
+          <span
+            style={{
+              fontSize: "20px",
+              color: "#626161",
+              textTransform: "capitalize",
+            }}
+          >
+            {props.exp !== "f"
+              ? currentDesignation(props.user_experience)
+              : null}
           </span>
         </div>
         <Grid container spacing={2}>
@@ -88,12 +94,14 @@ const TemplateFour = (props) => {
                   Address
                 </h4>
                 <p>
-                { props.address != '' ? capitalize(props.address) + ', ' : props.address }
-                    { props.pin_code != '' ? props.pin_code : null }
+                  {props.address != ""
+                    ? capitalize(props.address) + ", "
+                    : props.address}
+                  {props.pin_code != "" ? props.pin_code : null}
                 </p>
                 <p>
-                { props.region != ''? capitalize(props.region) + ',': null}
-                  {props.country != ''? capitalize(props.country): null} 
+                  {props.region != "" ? capitalize(props.region) + "," : null}
+                  {props.country != "" ? capitalize(props.country) : null}
                 </p>
               </span>
               <span>
@@ -106,9 +114,7 @@ const TemplateFour = (props) => {
                 >
                   Contact Number
                 </h4>
-                <p>
-                {props.mobile_number}
-                </p>
+                <p>{props.mobile_number}</p>
               </span>
               <span>
                 <h4
@@ -120,9 +126,7 @@ const TemplateFour = (props) => {
                 >
                   Email id
                 </h4>
-                <p>
-                  {props.email}
-                </p>
+                <p>{props.email}</p>
               </span>
             </div>
             <div style={{ paddingTop: "25px" }}>
@@ -187,54 +191,53 @@ const TemplateFour = (props) => {
                   marginBottom: "21px",
                 }}
               />
-              {props.exp === 'f'? (
+              {props.exp === "f" ? (
                 <div>
-                  <p> 
-                 I have no work experience. I am coming here to get experience with your guidance and support. I have a ability to cope with different situations.
-                 
+                  <p>
+                    I have no work experience. I am coming here to get
+                    experience with your guidance and support. I have a ability
+                    to cope with different situations.
                   </p>
                 </div>
-              ) : <div>
-              {props.user_experience.map((exp,i) =>(
+              ) : (
                 <div>
-                <h4
-                  style={{
-                    textTransform: "uppercase",
-                    fontSize: "16px",
-                    letterSpacing: "0.2rem",
-                  }}
-                >
-                  {exp.job_title}
-                </h4>
-                <h4
-                  style={{
-                    textTransform: "uppercase",
-                    fontSize: "16px",
-                    letterSpacing: "0.2rem",
-                  }}
-                >
-                  {exp.org_name != ""? capitalize(exp.org_name) + ' | ' :  exp.org_name}
-              {exp.start_year != ''? exp.start_year + ' - ' : exp.start_year}
-              {exp.end_year != '' ? exp.end_year : null}
-                </h4>
-                {exp.key_points.map((points,i)=> (
-                  <ul>
-                  <li>
-                    <Typography>
-                      {capitalize(points)}
-                    </Typography>
-                  </li>
-                 
-                </ul>
-                ))}
-                
+                  {props.user_experience.map((exp, i) => (
+                    <div>
+                      <h4
+                        style={{
+                          textTransform: "uppercase",
+                          fontSize: "16px",
+                          letterSpacing: "0.2rem",
+                        }}
+                      >
+                        {exp.job_title}
+                      </h4>
+                      <h4
+                        style={{
+                          textTransform: "uppercase",
+                          fontSize: "16px",
+                          letterSpacing: "0.2rem",
+                        }}
+                      >
+                        {exp.org_name != ""
+                          ? capitalize(exp.org_name) + " | "
+                          : exp.org_name}
+                        {exp.start_year != ""
+                          ? exp.start_year + " - "
+                          : exp.start_year}
+                        {exp.end_year != "" ? exp.end_year : null}
+                      </h4>
+                      {exp.key_points.map((points, i) => (
+                        <ul>
+                          <li>
+                            <Typography>{capitalize(points)}</Typography>
+                          </li>
+                        </ul>
+                      ))}
+                    </div>
+                  ))}
                 </div>
-              ))}
-                
-              </div>
-              }
-              
-       
+              )}
             </div>
             <div>
               <h3
@@ -258,15 +261,18 @@ const TemplateFour = (props) => {
                   letterSpacing: "0.2rem",
                 }}
               >
-                {props.university_name != ""? capitalize(props.university_name) + ' | ' :  props.university_name}
-              {props.start_year != ''? props.start_year + ' - ' : props.start_year}
-              {props.end_year != '' ? props.end_year : null}
+                {props.university_name != ""
+                  ? capitalize(props.university_name) + " | "
+                  : props.university_name}
+                {props.start_year != ""
+                  ? props.start_year + " - "
+                  : props.start_year}
+                {props.end_year != "" ? props.end_year : null}
               </h4>
+              <p>{props.degree}</p>
               <p>
-              {props.degree}
-              </p>
-              <p>
-              I had completed {capitalize(props.qualification)} with the {props.marks} % of marks.
+                I had completed {capitalize(props.qualification)} with the{" "}
+                {props.marks} % of marks.
               </p>
             </div>
           </Grid>
@@ -274,7 +280,7 @@ const TemplateFour = (props) => {
       </Grid>
     </Container>
   );
-}
+};
 
 const mapstatetoProps = (state) => ({
   amount: state.amount,
@@ -290,7 +296,7 @@ const mapstatetoProps = (state) => ({
   region: state.region,
   pin_code: state.pin_code,
   description: state.description,
-    exp: state.exp,
+  exp: state.exp,
   user_experience: state.user_experience,
   qualification: state.qualification,
   university_name: state.university_name,
@@ -298,10 +304,9 @@ const mapstatetoProps = (state) => ({
   marks: state.marks,
   start_year: state.start_year,
   end_year: state.end_year,
-  chipData:state.chipData,
+  chipData: state.chipData,
 });
 
 const mapdispatchtoProps = () => {};
 
 export default connect(mapstatetoProps, null)(TemplateFour);
-

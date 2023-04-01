@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useSnackbar } from 'notistack';
 import React, { useState } from "react";
+import { makeStyles } from "@mui/styles";
 import { connect } from "react-redux";
 import CustomInput from "../../../components/CustomInput/CustomInput";
 import * as storeActions from "../../../store/action-creator";
@@ -14,12 +15,40 @@ const ColorButton = styled(Button)(({ theme }) => ({
   "&:hover": {
     backgroundColor: "rgb(159, 69, 69)",
   },
+  
+}));
+
+const useStyles = makeStyles(() => ({
+  dropdownWrapper: {
+    "& select": {
+      padding: "13px 7px",
+      borderColor: "#ced4da",
+      background: "#ffffff",
+      color: "#919191",
+      borderRadius: "4px",
+      width: "80.3%",
+    },
+  },
+
+  root:{
+
+    '@media(max-width: 600px)' : {
+      "& .sectionHeading": {
+        fontSize: '2rem !important',
+        textAlign: 'center',
+      },
+
+      "& .MuiGrid-root.MuiGrid-container":{
+          justifyContent:'center'
+      }
+    }
+  }
 }));
 
 //
 
 const Education= (props) =>{
-  //   const classes = useStyles();
+    const classes = useStyles();
 
   const [education, setEducation] = useState({});
   const { enqueueSnackbar } = useSnackbar();
@@ -49,7 +78,7 @@ const Education= (props) =>{
   }
 
   return (
-    <div>
+    <div className={classes.root}>
       <Typography
        className="sectionHeading"
         variant="h3"

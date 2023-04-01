@@ -1,5 +1,5 @@
+
 export const inputChangeHandler = (event) => {
-   // console.log(event)
      return(dispatch) => {
          dispatch ({
              type: 'INPUT_CHANGE',
@@ -8,6 +8,7 @@ export const inputChangeHandler = (event) => {
      }
  
  }
+
 
  export const countryChangeHandler = (val) => {
     return(dispatch) => {
@@ -28,7 +29,6 @@ export const inputChangeHandler = (event) => {
  }
 
  export const tabChangeHandler= (value) =>{
-   //// console.log(value,'dhdhdhdhdh')
     return(dispatch) => {
         dispatch ({
             type: 'TAB_CHANGE',
