@@ -8,6 +8,7 @@ import jsPDF from "jspdf";
 import { useSnackbar } from "notistack";
 import React, { useRef, useState } from "react";
 import { connect } from "react-redux";
+import Box from '@mui/material/Box';
 import { useNavigate } from "react-router-dom";
 import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 import TemplateFour from "../../components/Templates/TemplateFour.jsx";
@@ -15,6 +16,8 @@ import TemplateOne from "../../components/Templates/TemplateOne.jsx";
 import TemplateThree from "../../components/Templates/TemplateThree.jsx";
 import TemplateTwo from "../../components/Templates/TemplateTwo.jsx";
 import * as storeActions from "../../store/action-creator/index.js";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Modal from '@mui/material/Modal';
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText("rgb(159, 69, 69)"),
   backgroundColor: "rgb(159, 69, 69)",
@@ -22,6 +25,19 @@ const ColorButton = styled(Button)(({ theme }) => ({
     backgroundColor: "rgb(159, 69, 69)",
   },
 }));
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  textAlign: 'center',
+  p: 4,
+};
 
 const styles = makeStyles(() => ({
   root: {
@@ -79,6 +95,9 @@ const Preview = (props) => {
   const [fileName, setFileName] = useState("");
   const printableAreaRef = useRef(null);
   const { enqueueSnackbar } = useSnackbar();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = () => setOpen(false);
 
   // to make function to show preview of selected template
   const selectedTemplate = (selectedValue) => {
@@ -180,8 +199,8 @@ const Preview = (props) => {
         heightLeft -= pageHeight;
       }
       doc.save(fileName.replace(" ") + ".pdf");
-      window.open(doc.output("bloburl"), "_blank");
     });
+    setOpen(true);
   };
 
   return (
@@ -236,6 +255,19 @@ const Preview = (props) => {
           </Grid>
         </Grid>
       </Grid>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <CheckCircleOutlineIcon fontSize="large" style={{color: 'rgb(159, 69, 69)'}} />
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Your Resume has been Successfully Saved
+          </Typography>
+        </Box>
+      </Modal>
     </div>
   );
 };
