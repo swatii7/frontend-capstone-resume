@@ -76,11 +76,12 @@ a:hover {
 
 .head-section {
   margin: 0;
-  /* padding-top: 29px; */
+
   line-height: 0 ;
   
 }
 
+/* add stle in all p tags for give some custom space */
 p{
   letter-spacing: 0.1rem !important;
     word-spacing: 0.1rem !important;

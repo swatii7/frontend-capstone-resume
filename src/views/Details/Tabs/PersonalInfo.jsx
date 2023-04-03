@@ -44,7 +44,8 @@ const useStyles = makeStyles(() => ({
       },
 
       "& .MuiGrid-root.MuiGrid-container":{
-          justifyContent:'center'
+          justifyContent:'center',
+          textAlign: 'center'
       }
     }
   }

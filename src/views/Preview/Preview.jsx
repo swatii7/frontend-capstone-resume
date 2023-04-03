@@ -148,6 +148,7 @@ const Preview = (props) => {
     }
   };
 
+  //select template
   const FinalResume = (selectedId) => {
     switch (selectedId) {
       case 0:
@@ -175,7 +176,7 @@ const Preview = (props) => {
     const divToPrint = FinalResume(props.activeSlide);
 
     const input = document.getElementById(divToPrint);
-
+// set a default pdf style to all templates
     html2canvas(input).then((canvas) => {
       var imgData = canvas.toDataURL("image/png");
       var imgWidth = 400;

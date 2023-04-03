@@ -11,7 +11,7 @@ import App from './App'
 import { SnackbarProvider  } from 'notistack';
 
 import './index.css'
-
+// add custom styles to theme
 const theme = createTheme({
   palette: {
     primary: {
@@ -20,16 +20,6 @@ const theme = createTheme({
     typography: {
       fontFamily: [
         "IBM Plex Sans",
-        //  "-apple-system",
-        //   "BlinkMacSystemFont",
-        //  "Segoe UI",
-        //   "Roboto",
-        //   "Helvetica Neue",
-        //    "Arial",
-        //     "sans-serif", 
-        //     "Apple Color Emoji",
-        //      "Segoe UI Emoji", 
-        //      "Segoe UI Symbol"
       ].join(','),
     },
   },

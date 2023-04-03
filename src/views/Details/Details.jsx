@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 
 
 
-
+//used for give some custom styles
 const useStyles = makeStyles(()=>({
 
 tabsBtnWrapper:{
@@ -50,12 +50,7 @@ function a11yProps(index) {
 }
 
 const VerticalTabs= (props)=> {
-  const [value, setValue] = React.useState(0);
   const classes = useStyles();
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-
-  };
 
   return (
     
