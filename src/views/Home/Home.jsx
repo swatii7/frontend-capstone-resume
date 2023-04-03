@@ -99,16 +99,20 @@ const Home = (props) => {
                 lg={3}
                 md={3}
                 style={{
-                  width: 400,
-                  height: 600,
-                  border: "30px solid white",
-                  textAlign: "center",
-                  lineHeight: "240px",
-                  boxSizing: "border-box",
-                  backgroundImage: `url(${item.preview})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  overflow: "hidden",
+
+                  width: "400px",
+    height: "600px",
+    border: "20px solid rgb(255, 255, 255)",
+    textAlign: "center",
+    lineHeight: "240px",
+    boxSizing: "border-box",
+    background: "#fff",
+    backgroundImage: `url(${item.preview})`,
+    backgroundSize: "contain",
+    backgroundPosition: "top",
+    overflow: "hidden",
+    backgroundRepeat: "no-repeat"
+
                 }}
                 className="container"
                 key={index}

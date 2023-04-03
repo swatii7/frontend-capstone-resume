@@ -102,28 +102,29 @@ const TemplateOne = (props) => {
                     fontSize: "18px",
                     fontWeight: 600,
                   }}
-                >
-                  <p className="head-section" style={{ paddingTop: "11px" }}>
+                ><p>
+                  <span className="head-section" style={{ paddingTop: "11px" }}>
                     {props.address != ""
                       ? capitalize(props.address) + ", "
                       : props.address}
                     {props.pin_code != "" ? props.pin_code : null}
-                  </p>
-                  <p className="head-section" style={{ paddingTop: "21px" }}>
+                  </span><br />
+                  <span className="head-section" style={{ paddingTop: "21px" }}>
                     {props.region != "" ? capitalize(props.region) + "," : null}
                     {props.country != "" ? capitalize(props.country) : null}
-                  </p>
-                  <p className="head-section" style={{ paddingTop: "24px" }}>
+                  </span><br />
+                  <span className="head-section" style={{ paddingTop: "24px" }}>
                     {props.mobile_number}{" "}
-                  </p>
-                  <p className="head-section" style={{ paddingTop: "24px" }}>
+                  </span><br />
+                  <span className="head-section" style={{ paddingTop: "24px" }}>
                     {props.email}
-                  </p>
-                  <p className="head-section" style={{ paddingTop: "24px" }}>
+                  </span><br />
+                  <span className="head-section" style={{ paddingTop: "24px" }}>
                     {capitalize(props.gender)}
-                  </p>
-                  <p className="head-section" style={{ paddingTop: "24px" }}>
+                  </span><br />
+                  <span className="head-section" style={{ paddingTop: "24px" }}>
                     {capitalize(props.marital_status)}
+                  </span>
                   </p>
                 </div>
               </Grid>
