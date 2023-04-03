@@ -11,7 +11,7 @@ Install frontend-capstone-resume with npm
 1. Create a directory on your system
 
 ```bash
-1. git clone : https://github.com/swatii7/frontend-capstone-resume.git
+1. git clone https://github.com/swatii7/frontend-capstone-resume.git
 2. cd frontend-capstone-resume
 3. npm install --force
 
