@@ -94,7 +94,8 @@ const Home = (props) => {
         <div className={classes.root}>
           <Grid container spacing={2}>
             {templatePreview.map((item, index) => (
-              <Grid
+              <Grid 
+              key= {index}
                 item
                 lg={3}
                 md={3}

@@ -144,8 +144,8 @@ const TemplateFour = (props) => {
                   marginBottom: "21px",
                 }}
               />
-              {props.chipData.map((data) => (
-                <ul>
+              {props.chipData.map((data,index) => (
+                <ul key={index}>
                   <li>{capitalize(data.key)}</li>
                 </ul>
               ))}
@@ -202,7 +202,7 @@ const TemplateFour = (props) => {
               ) : (
                 <div>
                   {props.user_experience.map((exp, i) => (
-                    <div>
+                    <div key ={i}>
                       <h4
                         style={{
                           textTransform: "uppercase",
@@ -228,9 +228,10 @@ const TemplateFour = (props) => {
                         {exp.end_year != "" ? exp.end_year : null}
                       </h4>
                       {exp.key_points.map((points, i) => (
-                        <ul>
+                        <ul key={i}>
                           <li>
-                            <Typography>{capitalize(points)}</Typography>
+                          <Typography className="hello" dangerouslySetInnerHTML={{ __html: points}}></Typography>
+                        
                           </li>
                         </ul>
                       ))}

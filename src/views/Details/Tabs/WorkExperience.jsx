@@ -197,9 +197,10 @@ const PersonalInfo = (props) => {
                       xs={10}
                       md={9}
                       lg={9}
+                      key={keyPointIndex}
                       style={{ marginTop: "25px" }}
                     >
-                      <div dangerouslySetInnerHTML={{ __html: points }}></div>
+                      <div className="hello" dangerouslySetInnerHTML={{ __html: points.replace(/<\/?[^>]+>/gi, '') }}></div>
                     </Grid>
                     <Grid
                       item

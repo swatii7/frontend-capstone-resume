@@ -188,7 +188,7 @@ const TemplateOne = (props) => {
               <Grid item md={7} lg={7}>
                 {/* map function to add another work experience */}
                 {props.user_experience.map((exp, i) => (
-                  <div>
+                  <div key={i}>
                     <h3 style={{ marginBottom: "6px", fontSize: "22px" }}>
                       {capitalize(exp.job_title)}
                     </h3>
@@ -217,9 +217,10 @@ const TemplateOne = (props) => {
 
                     {/* map function for adding key points in work experience tab */}
                     {exp.key_points.map((points, i) => (
-                      <ul>
+                      <ul key={i}>
                         <li>
-                          <Typography>{capitalize(points)}</Typography>
+                        <Typography className="hello" dangerouslySetInnerHTML={{ __html: points}}></Typography>
+                        
                         </li>
                       </ul>
                     ))}
@@ -304,8 +305,8 @@ const TemplateOne = (props) => {
                   </h2>
                   {/*  map function for add  key skills */}
 
-                  {props.chipData.map((data) => (
-                    <ul>
+                  {props.chipData.map((data, index) => (
+                    <ul key={index}>
                       <li>
                         <Typography>{capitalize(data.key)}</Typography>
                       </li>

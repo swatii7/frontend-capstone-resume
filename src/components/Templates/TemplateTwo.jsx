@@ -166,7 +166,7 @@ const TemplateTwo = (props) => {
             </div>
           ) : (
             props.user_experience.map((exp, i) => (
-              <Grid container spacing={2} style={{ padding: "0px 26px" }}>
+              <Grid key={i} container spacing={2} style={{ padding: "0px 26px" }}>
                 <Grid item md={5} lg={5}>
                   <div style={{ marginTop: "22px" }}>
                     <span style={{ fontSize: "20px", fontWeight: 600 }}>
@@ -187,9 +187,10 @@ const TemplateTwo = (props) => {
                     </span>
 
                     {exp.key_points.map((points, index) => (
-                      <ul>
+                      <ul key={index}>
                         <li>
-                          <Typography>{capitalize(points)}</Typography>
+                        <Typography className="hello" dangerouslySetInnerHTML={{ __html: points}}></Typography>
+                        
                         </li>
                       </ul>
                     ))}
@@ -273,8 +274,8 @@ const TemplateTwo = (props) => {
                   }}
                 />
 
-                {props.chipData.map((data) => (
-                  <ul>
+                {props.chipData.map((data,index) => (
+                  <ul key={index}>
                     <li>
                       <Typography>{capitalize(data.key)}</Typography>
                     </li>

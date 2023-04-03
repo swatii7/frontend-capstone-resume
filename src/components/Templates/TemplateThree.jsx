@@ -89,8 +89,8 @@ const TemplateThree = (props) => {
               >
                 Skills
               </h2>
-              {props.chipData.map((data) => (
-                <ul>
+              {props.chipData.map((data, index) => (
+                <ul key={index}>
                   <li>
                     <Typography>{capitalize(data.key)}</Typography>
                   </li>
@@ -118,7 +118,7 @@ const TemplateThree = (props) => {
               ) : (
                 <div>
                   {props.user_experience.map((exp, i) => (
-                    <div>
+                    <div key={i}>
                       <h4>{capitalize(exp.job_title)}</h4>
                       <h4>
                         {exp.org_name != ""
@@ -131,9 +131,10 @@ const TemplateThree = (props) => {
                         {/* {capitalize(exp.org_name) + ' | ' + (exp.start_year)+ ' - ' + (exp.end_year)} */}
                       </h4>
                       {exp.key_points.map((points, i) => (
-                        <ul>
+                        <ul key={i}>
                           <li>
-                            <Typography>{capitalize(points)}</Typography>
+                          <Typography className="hello" dangerouslySetInnerHTML={{ __html: points}}></Typography>
+                        
                           </li>
                         </ul>
                       ))}
