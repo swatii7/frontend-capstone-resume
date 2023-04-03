@@ -45,22 +45,12 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-//
 
 const Education= (props) =>{
     const classes = useStyles();
-
-  const [education, setEducation] = useState({});
   const { enqueueSnackbar } = useSnackbar();
 
-  const inputHandler = (e) => {
-    setEducation({
-      ...education,
-      [e.target.name]:
-        e.target.type === "checkbox" ? e.target.checked : e.target.value,
-    });
-  };
-
+  //on tab hander conditions imposed on input fields
   const tabHandler= ()=>{
     if(props.qualification === '' ||
     props.university_name === '' ||

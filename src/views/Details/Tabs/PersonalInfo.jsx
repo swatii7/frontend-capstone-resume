@@ -158,7 +158,7 @@ const PersonalInfo = (props) => {
 
       <Grid container  alignItems="flex-end">
 
-        <Grid item md={6} lg={6} style={{ marginTop: '15px' }}>
+        <Grid item xs= {12} md={6} lg={6} style={{ marginTop: '15px' }}>
 
           <div className={classes.dropdownWrapper} style={{ marginTop: '15px' }}>
 
@@ -170,7 +170,7 @@ const PersonalInfo = (props) => {
           </div>
 
         </Grid>
-        <Grid item md={6} lg={6} style={{ marginTop: '15px' }}>
+        <Grid item xs= {12} md={6} lg={6} style={{ marginTop: '15px' }}>
         <div className={classes.dropdownWrapper} style={{ marginTop: '15px' }}>
             <RegionDropdown
               country={props.country}
