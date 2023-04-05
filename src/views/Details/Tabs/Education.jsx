@@ -61,7 +61,7 @@ const Education= (props) =>{
     props.start_year === '' ||
     props.end_year === ''
     ){
-      enqueueSnackbar('All Fields are required')
+      enqueueSnackbar('All Fields are required',{variant:'error'});
     }
     else{
       props.tabChangeHandler(3) 

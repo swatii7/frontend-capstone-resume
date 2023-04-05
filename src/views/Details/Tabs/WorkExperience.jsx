@@ -83,19 +83,19 @@ const PersonalInfo = (props) => {
     const getcurrentposition = props.user_experience.length; //0
     if (getcurrentposition !== -1) {
       if (props.user_experience[getcurrentposition - 1].job_title === "") {
-        enqueueSnackbar("All Fields are required");
+        enqueueSnackbar("All Fields are required",{variant:'error'});
       } else if (
         props.user_experience[getcurrentposition - 1].org_name === ""
       ) {
-        enqueueSnackbar("All Fields are required");
+        enqueueSnackbar("All Fields are required", {variant:'error'});
       } else if (
         props.user_experience[getcurrentposition - 1].start_year === ""
       ) {
-        enqueueSnackbar("All Fields are required");
+        enqueueSnackbar("All Fields are required", {variant:'error'});
       } else if (
         props.user_experience[getcurrentposition - 1].end_year === ""
       ) {
-        enqueueSnackbar("All Fields are required");
+        enqueueSnackbar("All Fields are required", {variant:'error'});
       } else {
         props.addAnotherExpHandler(getcurrentposition);
       }
@@ -104,14 +104,14 @@ const PersonalInfo = (props) => {
 
   const tabHandler = () => {
     if (props.user_experience.length === 0) {
-      enqueueSnackbar("All Fields are required");
+      enqueueSnackbar("All Fields are required", {variant:'error'});
     } else if (
       props.user_experience[0].job_title === "" ||
       props.user_experience[0].org_name === "" ||
       props.user_experience[0].start_year === "" ||
       props.user_experience[0].end_year === ""
     ) {
-      enqueueSnackbar("All Fields are required");
+      enqueueSnackbar("All Fields are required", {variant:'error'});
     } else {
       props.tabChangeHandler(2);
     }

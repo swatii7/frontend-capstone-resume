@@ -73,7 +73,7 @@ const KeySkill = (props) => {
 
   const SkillHandlerTab = () => {
     if (keySkill === "") {
-      enqueueSnackbar("Enter atleast 3 valid key Skills");
+      enqueueSnackbar("Enter atleast 3 valid key Skills",{variant:'error'});
     } else {
       props.addSkillHandler(keySkill);
       setKeySkill("");

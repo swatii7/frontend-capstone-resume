@@ -114,13 +114,22 @@ const PersonalInfo = (props) => {
       props.address === ''||
       props.description === ''
     ){
-      enqueueSnackbar('All Fields are required')
+      enqueueSnackbar('All Fields are required',{ 
+        variant: 'error',
+
+      })
     }
     else if(props.email !== '' && !emailRegex.test(props.email)){
-      enqueueSnackbar('Enter Valid Email')
+      enqueueSnackbar('Enter Valid Email',{ 
+        variant: 'error',
+
+      })
     } 
     else if( props.mobile_number !== '' && !phoneno.test(props.mobile_number)){
-      enqueueSnackbar('Enter valid Mobile Number')
+      enqueueSnackbar('Enter valid Mobile Number', { 
+        variant: 'error',
+
+      })
     }
     else{
       props.tabChangeHandler(1) 

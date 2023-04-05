@@ -169,7 +169,7 @@ const Preview = (props) => {
   const jspdfGenerator = () => {
     //here condition is impose user must enter file name
     if (fileName === "") {
-      enqueueSnackbar("Enter valid file name");
+      enqueueSnackbar("Enter valid file name", {variant: 'error'});
       return;
     }
 
