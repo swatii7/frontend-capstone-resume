@@ -116,7 +116,7 @@ const Home = (props) => {
 
                 }}
                 className="container"
-                key={index}
+
               >
                 <div style={{ width: "200px", height: "auto" }}></div>
 
